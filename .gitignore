@@ -5,6 +5,7 @@
 .out.*
 out
 out.*
+*.*.map
 quick-test
 quick-test.*
 tmp
