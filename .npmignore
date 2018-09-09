@@ -22,3 +22,7 @@ yarn.lock
 package-lock.json
 shrinkwrap*
 renovate*
+*.ts
+!*.d.ts
+*.js.map
+*.d.ts.map
