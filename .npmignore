@@ -2,7 +2,6 @@
 *.log
 quick-test
 test
-spec.*
 tmp
 temp
 tmp.*
@@ -25,5 +24,7 @@ shrinkwrap*
 renovate*
 *.ts
 !*.d.ts
+spec.*
+spec.d.ts
 *.js.map
 *.d.ts.map
