@@ -1,0 +1,21 @@
+devDependencies:
+  static-type-assert: 0.0.1
+  typescript: 3.0.3
+packages:
+  /static-type-assert/0.0.1:
+    dev: true
+    resolution:
+      integrity: sha512-FoUY5zuf7lrSCvf3q1fszw+j3vlANR2/NhPJ9o2jzdGaawRyXkusSnxMetrnpjJ76/eB2Ck/OD0dzt4/axPnEw==
+  /typescript/3.0.3:
+    dev: true
+    engines:
+      node: '>=4.2.0'
+    hasBin: true
+    resolution:
+      integrity: sha512-kk80vLW9iGtjMnIv11qyxLqZm20UklzuR2tL0QAnDIygIUIemcZMxlMWudl9OOt76H3ntVzcTiddQ1/pAAJMYg==
+registry: 'https://registry.npmjs.org/'
+shrinkwrapMinorVersion: 9
+shrinkwrapVersion: 3
+specifiers:
+  static-type-assert: ^0.0.1
+  typescript: ^3.0.3

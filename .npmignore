@@ -2,6 +2,7 @@
 *.log
 quick-test
 test
+spec.*
 tmp
 temp
 tmp.*
