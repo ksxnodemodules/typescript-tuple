@@ -25,5 +25,8 @@
   "devDependencies": {
     "typescript": "^3.0.3",
     "static-type-assert": "^0.0.1"
+  },
+  "peerDependencies": {
+    "typescript": ">= 3.0.0"
   }
 }
