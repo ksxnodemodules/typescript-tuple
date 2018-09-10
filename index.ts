@@ -32,34 +32,34 @@ export type Concat<Left extends any[], Right extends any[]> = utils.Concat<Left,
 
 export namespace utils {
   export type Last<Tuple extends any[], Default = never> = {
-    0: Default,
-    1: Tuple extends [infer SoleElement] ? SoleElement : never,
-    2: ((..._: Tuple) => any) extends ((_: any, ..._1: infer Next) => any) ? Last<Next> : Default
+    empty: Default,
+    single: Tuple extends [infer SoleElement] ? SoleElement : never,
+    multi: ((..._: Tuple) => any) extends ((_: any, ..._1: infer Next) => any) ? Last<Next> : Default
   }[
-    Tuple extends [] ? 0 : Tuple extends [any] ? 1 : 2
+    Tuple extends [] ? 'empty' : Tuple extends [any] ? 'single' : 'multi'
   ]
 
   export type Prepend<Tuple extends any[], Addend> =
     ((_: Addend, ..._1: Tuple) => any) extends ((..._: infer Result) => any) ? Result : never
 
   export type Reverse<Tuple extends any[], Prefix extends any[] = []> = {
-    0: Prefix,
-    1: ((..._: Tuple) => any) extends ((_: infer First, ..._1: infer Next) => any)
+    empty: Prefix,
+    nonEmpty: ((..._: Tuple) => any) extends ((_: infer First, ..._1: infer Next) => any)
       ? Reverse<Next, Prepend<Prefix, First>>
       : never
   }[
-    Tuple extends [any, ...any[]] ? 1 : 0
+    Tuple extends [any, ...any[]] ? 'nonEmpty' : 'empty'
   ]
 
   export type Concat<Left extends any[], Right extends any[]> = {
-    0: Right,
-    1: Left extends [infer SoleElement]
+    emptyLeft: Right,
+    singleLeft: Left extends [infer SoleElement]
       ? Prepend<Right, SoleElement>
       : never,
-    2: ((..._: Reverse<Left>) => any) extends ((_: infer LeftLast, ..._1: infer ReversedLeftRest) => any)
+    multiLeft: ((..._: Reverse<Left>) => any) extends ((_: infer LeftLast, ..._1: infer ReversedLeftRest) => any)
       ? Concat<Reverse<ReversedLeftRest>, Prepend<Right, LeftLast>>
       : never
   }[
-    Left extends [] ? 0 : Left extends [any] ? 1 : 2
+    Left extends [] ? 'emptyLeft' : Left extends [any] ? 'singleLeft' : 'multiLeft'
   ]
 }
