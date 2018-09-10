@@ -28,6 +28,10 @@ export type Prepend<Tuple extends any[], Addend> = utils.Prepend<Tuple, Addend>
  */
 export type Reverse<Tuple extends any[]> = utils.Reverse<Tuple>
 
+/**
+ * Concat two tuple into one
+ * @example `Concat<[0, 1, 2], ['a', 'b', 'c']>` → `[0, 1, 2, 'a', 'b', 'c']`
+ */
 export type Concat<Left extends any[], Right extends any[]> = utils.Concat<Left, Right>
 
 export namespace utils {
