@@ -5,7 +5,8 @@ import {
   Last,
   Append,
   Prepend,
-  Reverse
+  Reverse,
+  Concat
 } from './index'
 
 assert<First<['sole']>>('sole')
@@ -25,3 +26,11 @@ assert<Prepend<[0, 1, 2], 'new'>>(['new', 0, 1, 2])
 assert<Reverse<[]>>([])
 assert<Reverse<['sole']>>(['sole'])
 assert<Reverse<[0, 1, 2]>>([2, 1, 0])
+
+assert<Concat<[], []>>([])
+assert<Concat<[], [0]>>([0])
+assert<Concat<['a'], []>>(['a'])
+assert<Concat<['a'], [0]>>(['a', 0])
+assert<Concat<[], [0, 1, 2]>>([0, 1, 2])
+assert<Concat<['a', 'b', 'c'], []>>(['a', 'b', 'c'])
+assert<Concat<['a', 'b', 'c'], [0, 1, 2]>>(['a', 'b', 'c', 0, 1, 2])

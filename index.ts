@@ -28,6 +28,8 @@ export type Prepend<Tuple extends any[], Addend> = utils.Prepend<Tuple, Addend>
  */
 export type Reverse<Tuple extends any[]> = utils.Reverse<Tuple>
 
+export type Concat<Left extends any[], Right extends any[]> = utils.Concat<Left, Right>
+
 export namespace utils {
   export type Last<Tuple extends any[], Default = never> = {
     0: Default,
@@ -47,5 +49,17 @@ export namespace utils {
       : never
   }[
     Tuple extends [any, ...any[]] ? 1 : 0
+  ]
+
+  export type Concat<Left extends any[], Right extends any[]> = {
+    0: Right,
+    1: Left extends [infer SoleElement]
+      ? Prepend<Right, SoleElement>
+      : never,
+    2: ((..._: Reverse<Left>) => any) extends ((_: infer LeftLast, ..._1: infer ReversedLeftRest) => any)
+      ? Concat<Reverse<ReversedLeftRest>, Prepend<Right, LeftLast>>
+      : never
+  }[
+    Left extends [] ? 0 : Left extends [any] ? 1 : 2
   ]
 }
