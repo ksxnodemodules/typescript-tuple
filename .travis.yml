@@ -1,0 +1,29 @@
+branches:
+  except:
+    - draft
+    - tmp
+    - /.*\.(draft|tmp)$/
+    - /^(draft|tmp)\..*/
+
+language: node_js
+
+node_js:
+  - '10'
+
+cache:
+  directories:
+    - $HOME/.pnpm-store
+    - $HOME/.npm
+    - $HOME/.nvm
+    - $HOME/.node-gyp
+    - $HOME/.node_libraries
+
+before_install:
+  - curl -L https://unpkg.com/@pnpm/self-installer | node
+  - pnpm --version
+
+install:
+  - pnpm install
+
+script:
+  - pnpm test
