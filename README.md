@@ -48,6 +48,14 @@ type Foo = Reverse<['a', 'b', 'c']> // Expect: ['c', 'b', 'a']
 const foo: Foo = ['c', 'b', 'a']
 ```
 
+### `Concat`
+
+```typescript
+import { Concat } from 'typescript-tuple'
+type Foo = Concat<['a', 'b', 'c'], [0, 1, 2]> // Expect ['a', 'b', 'c', 0, 1, 2]
+const foo: Foo = ['a', 'b', 'c', 0, 1, 2]
+```
+
 ## License
 
 [MIT](https://git.io/fA2d9) @ [Hoàng Văn Khải](https://github.com/KSXGitHub)
