@@ -44,7 +44,7 @@ const foo: Foo = ['x', 'a', 'b', 'c']
 
 ```typescript
 import { Reverse } from 'typescript-tuple'
-type Foo = Reverse<['a', 'b', 'c'] // Expect: ['c', 'b', 'a']
+type Foo = Reverse<['a', 'b', 'c']> // Expect: ['c', 'b', 'a']
 const foo: Foo = ['c', 'b', 'a']
 ```
 
