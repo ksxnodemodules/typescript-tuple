@@ -34,6 +34,19 @@ export type Reverse<Tuple extends any[]> = utils.Reverse<Tuple>
  */
 export type Concat<Left extends any[], Right extends any[]> = utils.Concat<Left, Right>
 
+/**
+ * Repeat a certain type into a tuple
+ * @example `Repeat<'foo', 4>` → `['foo', 'foo', 'foo', 'foo']`
+ * @warning To avoid potential infinite loop, `Count` must be an integer greater than or equal to 0
+ */
+export type Repeat<Type, Count extends number> = utils.Repeat<Type, Count, []>
+
+/**
+ * Concat multiple tuples
+ * @example `ConcatMultiple<[], [0], [1, 2], [3, 4, 5]>` → `[0, 1, 2, 3, 4, 5]`
+ */
+export type ConcatMultiple<TupleSet extends any[][]> = utils.ConcatMultiple<TupleSet>
+
 export namespace utils {
   export type Last<Tuple extends any[], Default = never> = {
     empty: Default,
@@ -65,5 +78,28 @@ export namespace utils {
       : never
   }[
     Left extends [] ? 'emptyLeft' : Left extends [any] ? 'singleLeft' : 'multiLeft'
+  ]
+
+  export type Repeat<Type, Count extends number, Holder extends any[] = []> = {
+    fit: Holder,
+    unfit: Repeat<Type, Count, Prepend<Holder, Type>>
+  }[
+    Holder['length'] extends Count ? 'fit' : 'unfit'
+  ]
+
+  export type ConcatMultiple<TupleSet extends any[][]> = {
+    empty: [],
+    single: TupleSet extends [infer SoleTuple]
+      ? SoleTuple
+      : never,
+    multi: ((..._: Reverse<TupleSet>) => any) extends ((_: infer Last, ..._1: infer ReversedRest) => any) ?
+      Last extends any[] ?
+      ReversedRest extends any[][] ?
+        Concat<ConcatMultiple<Reverse<ReversedRest>>, Last> :
+      never :
+      never :
+      never
+  }[
+    TupleSet extends [] ? 'empty' : TupleSet extends [any] ? 'single' : 'multi'
   ]
 }

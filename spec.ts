@@ -6,7 +6,9 @@ import {
   Append,
   Prepend,
   Reverse,
-  Concat
+  Concat,
+  Repeat,
+  ConcatMultiple
 } from './index'
 
 assert<First<['sole']>>('sole')
@@ -34,3 +36,13 @@ assert<Concat<['a'], [0]>>(['a', 0])
 assert<Concat<[], [0, 1, 2]>>([0, 1, 2])
 assert<Concat<['a', 'b', 'c'], []>>(['a', 'b', 'c'])
 assert<Concat<['a', 'b', 'c'], [0, 1, 2]>>(['a', 'b', 'c', 0, 1, 2])
+
+assert<Repeat<'x', 0>>([])
+assert<Repeat<'x', 1>>(['x'])
+assert<Repeat<'x', 4>>(['x', 'x', 'x', 'x'])
+
+assert<ConcatMultiple<[]>>([])
+assert<ConcatMultiple<[[], [], []]>>([])
+assert<ConcatMultiple<[[], [0], [1, 2], [3, 4, 5]]>>([0, 1, 2, 3, 4, 5])
+assert<ConcatMultiple<[['a', 'b'], ['A', 'B'], [0, 1], [true, false]]>>(['a', 'b', 'A', 'B', 0, 1, true, false])
+assert<ConcatMultiple<[[0, 1, 2, 3], [4, 5, 6], [7, 8], [9], []]>>([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])

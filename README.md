@@ -56,6 +56,22 @@ type Foo = Concat<['a', 'b', 'c'], [0, 1, 2]> // Expect ['a', 'b', 'c', 0, 1, 2]
 const foo: Foo = ['a', 'b', 'c', 0, 1, 2]
 ```
 
+### `Repeat`
+
+```typescript
+import { Repeat } from 'typescript-tuple'
+type Foo = Repeat<['x'], 5> // Expect ['x', 'x', 'x', 'x', 'x']
+const foo: Foo = ['x', 'x', 'x', 'x', 'x']
+```
+
+### `ConcatMultiple`
+
+```typescript
+import { ConcatMultiple } from 'typescript-tuple'
+type Foo = ConcatMultiple<[[], ['a'], ['b', 'c']]> // Expect ['a', 'b', 'c']
+const foo: Foo = ['a', 'b', 'c']
+```
+
 ## License
 
 [MIT](https://git.io/fA2d9) @ [Hoàng Văn Khải](https://github.com/KSXGitHub)
