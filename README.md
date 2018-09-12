@@ -8,6 +8,21 @@ Generics to work with tuples in TypeScript
 
 ## Usage
 
+### `IsFinite`
+
+```typescript
+import { IsFinite } from 'typescript-tuple'
+
+type Foo = IsFinite<[0, 1, 2]> // Expect: true
+const foo: Foo = true
+
+type Bar = IsFinite<[0, 1, 2, ...number[]]> // Expect: false
+const bar: Bar = false
+
+type Baz = IsFinite<[0, 1, 2], 'finite', 'infinite'> // Expect: 'finite'
+const baz: Baz = 'finite'
+```
+
 ### `First`
 
 ```typescript
@@ -60,9 +75,25 @@ const foo: Foo = ['a', 'b', 'c', 0, 1, 2]
 
 ```typescript
 import { Repeat } from 'typescript-tuple'
-type Foo = Repeat<['x'], 5> // Expect ['x', 'x', 'x', 'x', 'x']
+
+// Basic
+type Foo = Repeat<'x', 5> // Expect ['x', 'x', 'x', 'x', 'x']
 const foo: Foo = ['x', 'x', 'x', 'x', 'x']
+
+// Using union
+type Bar = Repeat<'x', 1 | 3 | 4> // Expect ['x'] | ['x', 'x', 'x'] | ['x', 'x', 'x', 'x']
+const bar1: Bar = ['x']
+const bar3: Bar = ['x', 'x', 'x']
+const bar4: Bar = ['x', 'x', 'x', 'x']
+
+// Using ambiguous 'number' type
+type Baz = Repeat<'x', number> // Expect 'x'[]
+const baz: Baz = Array<number>()
 ```
+
+**NOTES:**
+
+* Due to TypeScript design limitations, using floating point numbers and negative numbers might lead to infinite loop within TSC compiler, avoid doing this.
 
 ### `ConcatMultiple`
 
