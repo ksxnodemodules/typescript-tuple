@@ -80,12 +80,15 @@ export namespace utils {
     Left extends [] ? 'emptyLeft' : Left extends [any] ? 'singleLeft' : 'multiLeft'
   ]
 
-  export type Repeat<Type, Count extends number, Holder extends any[] = []> = {
-    fit: Holder,
-    unfit: Repeat<Type, Count, Prepend<Holder, Type>>
-  }[
-    Holder['length'] extends Count ? 'fit' : 'unfit'
-  ]
+  export type Repeat<Type, Count extends number, Holder extends any[] = []> =
+    number extends Count
+      ? Type[]
+      : {
+          fit: Holder,
+          unfit: Repeat<Type, Count, Prepend<Holder, Type>>
+        }[
+          Holder['length'] extends Count ? 'fit' : 'unfit'
+        ]
 
   export type ConcatMultiple<TupleSet extends any[][]> = {
     empty: [],

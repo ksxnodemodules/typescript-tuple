@@ -40,6 +40,7 @@ assert<Concat<['a', 'b', 'c'], [0, 1, 2]>>(['a', 'b', 'c', 0, 1, 2])
 assert<Repeat<'x', 0>>([])
 assert<Repeat<'x', 1>>(['x'])
 assert<Repeat<'x', 4>>(['x', 'x', 'x', 'x'])
+assert<Repeat<'x', number>>([], ['x'], ['x', 'x'], Array<'x'>())
 
 assert<ConcatMultiple<[]>>([])
 assert<ConcatMultiple<[[], [], []]>>([])
