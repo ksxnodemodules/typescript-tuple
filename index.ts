@@ -93,9 +93,15 @@ export namespace utils {
     empty: Prefix,
     nonEmpty: ((..._: Tuple) => any) extends ((_: infer First, ..._1: infer Next) => any)
       ? Reverse<Next, Prepend<Prefix, First>>
-      : never
+      : never,
+    infinite: {
+      ERROR: 'Cannot reverse an infinite tuple',
+      CODENAME: 'InfiniteTuple'
+    }
   }[
-    Tuple extends [any, ...any[]] ? 'nonEmpty' : 'empty'
+    Tuple extends [any, ...any[]]
+      ? IsFinite<Tuple, 'nonEmpty', 'infinite'>
+      : 'empty'
   ]
 
   export type Concat<Left extends any[], Right extends any[]> = {
