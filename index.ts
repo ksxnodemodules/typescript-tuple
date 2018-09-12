@@ -78,6 +78,15 @@ export type FillTuple<Tuple extends any[], Replacement> = utils.FillTuple<Tuple,
  */
 export type CompareLength<Left extends any[], Right extends any[]> = utils.CompareLength<Left, Right>
 
+/**
+ * Sort two tuples in order of [shorter, longer]
+ * @example `SortTwoTuple<[0, 1, 2, 3], ['a', 'b']>` → `[['a', 'b'], [0, 1, 2, 3]]`
+ * @example `SortTwoTuple<[0, 1], ['a', 'b', 'c', 'd']>` → `[[0, 1], ['a', 'b', 'c', 'd']]`
+ * @example `SortTwoTuple<[0, 1, 2], ['a', 'b', 'c']>` → `[[0, 1, 2], ['a', 'b', 'c']]`
+ * @example `SortTwoTuple<[0, 1, 2], ['a', 'b', 'c'], 'EQUAL'>` → `'EQUAL'`
+ */
+export type SortTwoTuple<Left extends any[], Right extends any[], WhenEqual = [Left, Right]> = utils.SortTwoTuple<Left, Right, WhenEqual>
+
 export namespace utils {
   export type IsFinite<Tuple extends any[], Finite, Infinite> = {
     empty: Finite,

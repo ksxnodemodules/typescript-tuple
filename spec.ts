@@ -12,7 +12,8 @@ import {
   ConcatMultiple,
   SingleTupleSet,
   FillTuple,
-  CompareLength
+  CompareLength,
+  SortTwoTuple
 } from './index'
 
 assert<IsFinite<[]>>(true)
@@ -87,3 +88,8 @@ assert<CompareLength<['a', 'b', 'c'], [0]>>('shorterRight')
 assert<CompareLength<['a', 'b'], [0, 1]>>('equal')
 assert<CompareLength<string[], number[]>>('equal')
 assert<CompareLength<['a', 'b', ...string[]], [0, 1, ...number[]]>>('equal')
+
+assert<SortTwoTuple<[0, 1, 2, 3], ['a', 'b']>>([['a', 'b'], [0, 1, 2, 3]])
+assert<SortTwoTuple<[0, 1], ['a', 'b', 'c', 'd']>>([[0, 1], ['a', 'b', 'c', 'd']])
+assert<SortTwoTuple<[0, 1, 2], ['a', 'b', 'c']>>([[0, 1, 2], ['a', 'b', 'c']])
+assert<SortTwoTuple<[0, 1, 2], ['a', 'b', 'c'], 'EQUAL'>>('EQUAL')

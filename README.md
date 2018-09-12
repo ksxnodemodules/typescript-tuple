@@ -138,6 +138,24 @@ type Baz = CompareLength<[0, 1, 2, 3], ['a', 'b']> // Expect: 'shorterRight'
 const baz: Baz = 'shorterRight'
 ```
 
+### `SortTwoTuple`
+
+```typescript
+import { SortTwoTuple } from 'typescript-tuple'
+
+type Foo = SortTwoTuple<[0, 1], ['a', 'b', 'c', 'd']> // Expect: [[0, 1], ['a', 'b', 'c', 'd']]
+const foo: Foo = [[0, 1], ['a', 'b', 'c', 'd']]
+
+type Bar = SortTwoTuple<[0, 1, 2, 3], ['a', 'b']> // Expect: [['a', 'b'], [0, 1, 2, 3]]
+const bar: Bar = [['a', 'b'], [0, 1, 2, 3]]
+
+type Baz = SortTwoTuple<[0, 1, 2], ['a', 'b', 'c', 'd']> // Expect: [[0, 1, 2], ['a', 'b', 'c']]
+const baz: Baz = [[0, 1], 3, ['a', 'b', 'c']]
+
+type Qux = SortTwoTuple<[0, 1, 2], ['a', 'b', 'c', 'd'], 'EQUAL'> // Expect: 'EQUAL'
+const qux: Qux = 'EQUAL'
+```
+
 ## License
 
 [MIT](https://git.io/fA2d9) @ [Hoàng Văn Khải](https://github.com/KSXGitHub)
