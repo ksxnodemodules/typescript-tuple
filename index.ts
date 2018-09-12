@@ -86,7 +86,11 @@ export namespace utils {
       : {
           fit: Holder,
           unfit: Repeat<Type, Count, Prepend<Holder, Type>>,
-          union: Type[]
+          union: Count extends Holder['length'] | infer Rest ?
+            Rest extends number ?
+              Repeat<Type, Holder['length']> | Repeat<Type, Rest>
+            : never
+            : never
         }[
           Holder['length'] extends Count ? // It is possible for Count to be a union
           Count extends Holder['length'] ? // Make sure that Count is not a union
