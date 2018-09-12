@@ -226,8 +226,12 @@ export namespace utils {
       : never
       : never
       : never
-      : never
+      : never,
+    infinite: {
+      ERROR: 'TupleSet is not finite',
+      CODENAME: 'InfiniteTupleSet' & 'Infinite'
+    }
   }[
-    TupleSet extends [] ? 'empty' : 'nonEmpty'
+    TupleSet extends [] ? 'empty' : IsFinite<TupleSet, 'nonEmpty', 'infinite'>
   ]
 }
