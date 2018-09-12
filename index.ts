@@ -89,7 +89,7 @@ export namespace utils {
 
   export type ConcatMultiple<TupleSet extends any[][]> = {
     empty: [],
-    multi: ((..._: Reverse<TupleSet>) => any) extends ((_: infer Last, ..._1: infer ReversedRest) => any) ?
+    nonEmpty: ((..._: Reverse<TupleSet>) => any) extends ((_: infer Last, ..._1: infer ReversedRest) => any) ?
       Last extends any[] ?
       ReversedRest extends any[][] ?
         Concat<ConcatMultiple<Reverse<ReversedRest>>, Last> :
@@ -97,6 +97,112 @@ export namespace utils {
       never :
       never
   }[
-    TupleSet extends [] ? 'empty' : 'multi'
+    TupleSet extends [] ? 'empty' : 'nonEmpty'
   ]
+
+  export type SingleTupleSet<Types extends any[], Holder extends [any][] = []> = {
+    empty: Holder,
+    nonEmpty: ((..._: Reverse<Types>) => any) extends ((_: infer Last, ..._1: infer ReversedRest) => any)
+      ? SingleTupleSet<Reverse<ReversedRest>, Prepend<Holder, [Last]>>
+      : never
+  }[
+    Types extends [] ? 'empty' : 'nonEmpty'
+  ]
+
+  export type FillTuple<Tuple extends any[], Replacement, Holder extends any[] = []> = {
+    empty: Holder,
+    nonEmpty: ((...a: Tuple) => any) extends ((a: infer First, ...b: infer Rest) => any)
+      ? FillTuple<Rest, Replacement, Prepend<Holder, Replacement>>
+      : never
+  }[
+    Tuple extends [] ? 'empty' : 'nonEmpty'
+  ]
+
+  export type CompareLength<Left extends any[], Right extends any[]> = {
+    fitBoth: 'equal',
+    fitLeft: 'shorterLeft',
+    fitRight: 'shorterRight',
+    unfit: ((..._: Left) => any) extends ((_: any, ..._1: infer LeftRest) => any) ?
+      ((..._: Right) => any) extends ((_: any, ..._1: infer RightRest) => any) ?
+        CompareLength<LeftRest, RightRest>
+      : never
+      : never
+  }[
+    Left['length'] extends Right['length'] ? 'fitBoth' :
+    Left extends [] ? 'fitLeft' :
+    Right extends [] ? 'fitRight' :
+    'unfit'
+  ]
+
+  export type SortTwoTuple<Left extends any[], Right extends any[], WhenEqual = [Left, Right]> = {
+    equal: WhenEqual,
+    shorterLeft: [Left, Right],
+    shorterRight: [Right, Left]
+  }[CompareLength<Left, Right>]
+
+  export type ShortestTuple<TupleSet extends any[][], Shortest = any[]> = {
+    empty: Shortest,
+    nonEmpty: ((..._: TupleSet) => any) extends ((_: infer Head, ..._1: infer Tail) => any) ?
+      Tail extends any[] ?
+      Shortest extends any[] ?
+      Head extends any[] ?
+        ShortestTuple<Tail, SortTwoTuple<Shortest, Head>[0]>
+      : never
+      : never
+      : never
+      : never
+  }[
+    TupleSet extends [] ? 'empty' : 'nonEmpty'
+  ]
+
+  export type ZipPairWithShorterLeft<Left extends any[], Right extends any[], Holder extends any[][] = []> = {
+    empty: Holder,
+    nonEmpty: ((..._: Reverse<Left>) => any) extends ((_: infer LeftLast, ..._1: infer ReversedLeftRest) => any) ?
+      ((..._: Reverse<Right>) => any) extends ((_: infer RightLast, ..._1: infer ReversedRightRest) => any) ?
+        ZipPairWithShorterLeft<
+          Reverse<ReversedLeftRest>,
+          Reverse<ReversedRightRest>,
+          Prepend<Holder, [LeftLast, RightLast]>
+        >
+      : {
+        ERROR: 'Parameter "Left" should be shorter than or as long as "Right"',
+        CODENAME: 'LeftTooLong' & 'RightTooShort'
+      }
+      : never
+  }[
+    Left extends [] ? 'empty' : 'nonEmpty'
+  ]
+
+  export type ZipPairByBase<
+    Base extends any[], // Base can be [any, any, ...], its element type doesn't matter
+    Left extends any[],
+    Right extends any[],
+    Holder extends any[][] = []
+  > = {
+    empty: Holder,
+    nonEmpty: ((..._: Base) => any) extends ((_: any, ..._1: infer BaseRest) => any) ?
+      ((..._: Reverse<Left>) => any) extends ((_: infer LeftLast, ..._1: infer ReversedLeftRest) => any) ?
+      ((..._: Reverse<Right>) => any) extends ((_: infer RightLast, ..._1: infer ReversedRightRest) => any) ?
+        ZipPairByBase<
+          BaseRest,
+          Reverse<ReversedLeftRest>,
+          Reverse<ReversedRightRest>,
+          Prepend<Holder, [LeftLast, RightLast]>
+        >
+      : {
+        ERROR: 'Parameter "Right" is too short',
+        CODENAME: 'RightTooShort' & 'BaseTooLong'
+      }
+      : {
+        ERROR: 'Parameter "Left" is too short',
+        CODENAME: 'LeftTooShort' & 'BaseTooLong'
+      }
+      : never
+  }[
+    Base extends [] ? 'empty' : 'nonEmpty'
+  ]
+
+  export type ZipByShortest<TupleSet extends any[][], Holder extends any[][] = []> = {
+
+  }
 }
