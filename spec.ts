@@ -9,7 +9,12 @@ import {
   Reverse,
   Concat,
   Repeat,
-  ConcatMultiple
+  ConcatMultiple,
+  SingleTupleSet,
+  FillTuple,
+  CompareLength,
+  SortTwoTuple,
+  ShortestTuple
 } from './index'
 
 assert<IsFinite<[]>>(true)
@@ -64,3 +69,33 @@ assert<ConcatMultiple<[[], [], []]>>([])
 assert<ConcatMultiple<[[], [0], [1, 2], [3, 4, 5]]>>([0, 1, 2, 3, 4, 5])
 assert<ConcatMultiple<[['a', 'b'], ['A', 'B'], [0, 1], [true, false]]>>(['a', 'b', 'A', 'B', 0, 1, true, false])
 assert<ConcatMultiple<[[0, 1, 2, 3], [4, 5, 6], [7, 8], [9], []]>>([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+assert<SingleTupleSet<[]>>([])
+assert<SingleTupleSet<[0, 1, 2]>>([[0], [1], [2]])
+assert<SingleTupleSet<'x'[]>>(Array<['x']>(), [], [['x']], [['x'], ['x']])
+assert<SingleTupleSet<[0, ...'x'[]]>>([], [[0]], [[0], ['x'], ['x']])
+
+assert<FillTuple<[], 'x'>>([])
+assert<FillTuple<[0, 1, 2], 'x'>>(['x', 'x', 'x'])
+assert<FillTuple<number[], 'x'>>([], ['x'], ['x', 'x'], ['x', 'x', 'x'], Array<'x'>())
+assert<FillTuple<[0, ...number[]], 'x'>>(['x'], ['x', 'x'], ['x', 'x', 'x'])
+
+assert<CompareLength<[], []>>('equal')
+assert<CompareLength<[], [0, 1, 2]>>('shorterLeft')
+assert<CompareLength<['a', 'b', 'c'], []>>('shorterRight')
+assert<CompareLength<['a', 'b'], [0, 1]>>('equal')
+assert<CompareLength<['a'], [0, 1, 2]>>('shorterLeft')
+assert<CompareLength<['a', 'b', 'c'], [0]>>('shorterRight')
+assert<CompareLength<['a', 'b'], [0, 1]>>('equal')
+assert<CompareLength<string[], number[]>>('equal')
+assert<CompareLength<['a', 'b', ...string[]], [0, 1, ...number[]]>>('equal')
+
+assert<SortTwoTuple<[0, 1, 2, 3], ['a', 'b']>>([['a', 'b'], [0, 1, 2, 3]])
+assert<SortTwoTuple<[0, 1], ['a', 'b', 'c', 'd']>>([[0, 1], ['a', 'b', 'c', 'd']])
+assert<SortTwoTuple<[0, 1, 2], ['a', 'b', 'c']>>([[0, 1, 2], ['a', 'b', 'c']])
+assert<SortTwoTuple<[0, 1, 2], ['a', 'b', 'c'], 'EQUAL'>>('EQUAL')
+
+assert<ShortestTuple<[[0, 1, 2, 3]]>>([0, 1, 2, 3])
+assert<ShortestTuple<[[], [0], [1, 2], [3, 4, 5]]>>([])
+assert<ShortestTuple<[[0, 1, 2], [3, 4], [5], []]>>([])
+assert<ShortestTuple<[[0, 1, 2, 3, 4, 5], [true, false], ['a', 'b', 'c']]>>([true, false])

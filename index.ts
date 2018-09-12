@@ -56,6 +56,43 @@ export type Repeat<Type, Count extends number> = utils.Repeat<Type, Count, []>
  */
 export type ConcatMultiple<TupleSet extends any[][]> = utils.ConcatMultiple<TupleSet>
 
+/**
+ * Create a set of tuple of single element
+ * @example `SingleTupleSet<[0, 1, 2]>` → `[[0], [1], [2]]`
+ * @example `SingleTupleSet<[0, 1, 2, ...number[]]>` → `[[0], [1], [2], ...[number][]]`
+ */
+export type SingleTupleSet<Types extends any[]> = utils.SingleTupleSet<Types>
+
+/**
+ * Fill a tuple of types
+ * @example `FillTuple<[0, 1, 2], 'x'>` → `['x', 'x', 'x']`
+ * @example `FillTuple<any[], 'x'>` → `'x'[]`
+ */
+export type FillTuple<Tuple extends any[], Replacement> = utils.FillTuple<Tuple, Replacement>
+
+/**
+ * Compare length of two tuple
+ * @example `CompareLength<[0, 1, 2], ['a', 'b', 'c']>` → `'equal'`
+ * @example `CompareLength<[0, 1], ['a', 'b', 'c']>` → `'shorterLeft'`
+ * @example `CompareLength<[0, 1, 2], ['a', 'b']>` → `'shorterRight'`
+ */
+export type CompareLength<Left extends any[], Right extends any[]> = utils.CompareLength<Left, Right>
+
+/**
+ * Sort two tuples in order of [shorter, longer]
+ * @example `SortTwoTuple<[0, 1, 2, 3], ['a', 'b']>` → `[['a', 'b'], [0, 1, 2, 3]]`
+ * @example `SortTwoTuple<[0, 1], ['a', 'b', 'c', 'd']>` → `[[0, 1], ['a', 'b', 'c', 'd']]`
+ * @example `SortTwoTuple<[0, 1, 2], ['a', 'b', 'c']>` → `[[0, 1, 2], ['a', 'b', 'c']]`
+ * @example `SortTwoTuple<[0, 1, 2], ['a', 'b', 'c'], 'EQUAL'>` → `'EQUAL'`
+ */
+export type SortTwoTuple<Left extends any[], Right extends any[], WhenEqual = [Left, Right]> = utils.SortTwoTuple<Left, Right, WhenEqual>
+
+/**
+ * Find shortest tuple in a set of tuples
+ * @example `ShortestTuple<[[0, 1, 2], [true, false], ['a', 'b', 'c', 'd']]>` → `[true, false]`
+ */
+export type ShortestTuple<TupleSet extends [any[], ...any[][]]> = utils.ShortestTuple<TupleSet>
+
 export namespace utils {
   export type IsFinite<Tuple extends any[], Finite, Infinite> = {
     empty: Finite,
@@ -162,18 +199,22 @@ export namespace utils {
     empty: Holder,
     nonEmpty: ((..._: Reverse<Types>) => any) extends ((_: infer Last, ..._1: infer ReversedRest) => any)
       ? SingleTupleSet<Reverse<ReversedRest>, Prepend<Holder, [Last]>>
+      : never,
+    infinite: Types extends (infer Element)[]
+      ? [Element][]
       : never
   }[
-    Types extends [] ? 'empty' : 'nonEmpty'
+    Types extends [] ? 'empty' : IsFinite<Types, 'nonEmpty', 'infinite'>
   ]
 
   export type FillTuple<Tuple extends any[], Replacement, Holder extends any[] = []> = {
     empty: Holder,
     nonEmpty: ((...a: Tuple) => any) extends ((a: infer First, ...b: infer Rest) => any)
       ? FillTuple<Rest, Replacement, Prepend<Holder, Replacement>>
-      : never
+      : never,
+    infinite: Replacement[]
   }[
-    Tuple extends [] ? 'empty' : 'nonEmpty'
+    Tuple extends [] ? 'empty' : IsFinite<Tuple, 'nonEmpty', 'infinite'>
   ]
 
   export type CompareLength<Left extends any[], Right extends any[]> = {
@@ -208,9 +249,13 @@ export namespace utils {
       : never
       : never
       : never
-      : never
+      : never,
+    infinite: {
+      ERROR: 'TupleSet is not finite',
+      CODENAME: 'InfiniteTupleSet' & 'Infinite'
+    }
   }[
-    TupleSet extends [] ? 'empty' : 'nonEmpty'
+    TupleSet extends [] ? 'empty' : IsFinite<TupleSet, 'nonEmpty', 'infinite'>
   ]
 
   export type SingleTupleSet<Types extends any[], Holder extends [any][] = []> = {
