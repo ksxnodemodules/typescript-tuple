@@ -60,9 +60,25 @@ const foo: Foo = ['a', 'b', 'c', 0, 1, 2]
 
 ```typescript
 import { Repeat } from 'typescript-tuple'
+
+// Basic
 type Foo = Repeat<'x', 5> // Expect ['x', 'x', 'x', 'x', 'x']
 const foo: Foo = ['x', 'x', 'x', 'x', 'x']
+
+// Using union
+type Bar = Repeat<'x', 1 | 3 | 4> // Expect ['x'] | ['x', 'x', 'x'] | ['x', 'x', 'x', 'x']
+const bar1: Bar = ['x']
+const bar3: Bar = ['x', 'x', 'x']
+const bar4: Bar = ['x', 'x', 'x', 'x']
+
+// Using ambiguous 'number' type
+type Baz = Repeat<'x', number> // Expect 'x'[]
+const baz: Baz = Array<number>()
 ```
+
+**NOTES:**
+
+* Due to TypeScript design limitations, using floating point numbers and negative numbers might lead to infinite loop within TSC compiler, avoid doing this.
 
 ### `ConcatMultiple`
 
