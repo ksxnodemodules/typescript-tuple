@@ -10,7 +10,8 @@ import {
   Concat,
   Repeat,
   ConcatMultiple,
-  SingleTupleSet
+  SingleTupleSet,
+  FillTuple
 } from './index'
 
 assert<IsFinite<[]>>(true)
@@ -70,3 +71,8 @@ assert<SingleTupleSet<[]>>([])
 assert<SingleTupleSet<[0, 1, 2]>>([[0], [1], [2]])
 assert<SingleTupleSet<'x'[]>>(Array<['x']>(), [], [['x']], [['x'], ['x']])
 assert<SingleTupleSet<[0, ...'x'[]]>>([], [[0]], [[0], ['x'], ['x']])
+
+assert<FillTuple<[], 'x'>>([])
+assert<FillTuple<[0, 1, 2], 'x'>>(['x', 'x', 'x'])
+assert<FillTuple<number[], 'x'>>([], ['x'], ['x', 'x'], ['x', 'x', 'x'], Array<'x'>())
+assert<FillTuple<[0, ...number[]], 'x'>>(['x'], ['x', 'x'], ['x', 'x', 'x'])

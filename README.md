@@ -115,6 +115,14 @@ type Bar = SingleTupleSet<'x'[]> // Expect ['x'][]
 const bar: Bar = Array<['x']>()
 ```
 
+### `FillTuple`
+
+```typescript
+import { FillTuple } from 'typescript-tuple'
+type Foo = FillTuple<[0, 1, 2, 3], 'r'>
+const foo: Foo = ['r', 'r', 'r', 'r']
+```
+
 ## License
 
 [MIT](https://git.io/fA2d9) @ [Hoàng Văn Khải](https://github.com/KSXGitHub)

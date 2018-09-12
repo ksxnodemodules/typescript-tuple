@@ -63,6 +63,13 @@ export type ConcatMultiple<TupleSet extends any[][]> = utils.ConcatMultiple<Tupl
  */
 export type SingleTupleSet<Types extends any[]> = utils.SingleTupleSet<Types>
 
+/**
+ * Fill a tuple of types
+ * @example `FillTuple<[0, 1, 2], 'x'>` → `['x', 'x', 'x']`
+ * @example `FillTuple<any[], 'x'>` → `'x'[]`
+ */
+export type FillTuple<Tuple extends any[], Replacement> = utils.FillTuple<Tuple, Replacement>
+
 export namespace utils {
   export type IsFinite<Tuple extends any[], Finite, Infinite> = {
     empty: Finite,
@@ -181,9 +188,10 @@ export namespace utils {
     empty: Holder,
     nonEmpty: ((...a: Tuple) => any) extends ((a: infer First, ...b: infer Rest) => any)
       ? FillTuple<Rest, Replacement, Prepend<Holder, Replacement>>
-      : never
+      : never,
+    infinite: Replacement[]
   }[
-    Tuple extends [] ? 'empty' : 'nonEmpty'
+    Tuple extends [] ? 'empty' : IsFinite<Tuple, 'nonEmpty', 'infinite'>
   ]
 
   export type CompareLength<Left extends any[], Right extends any[]> = {
