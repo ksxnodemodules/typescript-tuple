@@ -60,7 +60,7 @@ const foo: Foo = ['a', 'b', 'c', 0, 1, 2]
 
 ```typescript
 import { Repeat } from 'typescript-tuple'
-type Foo = Repeat<['x'], 5> // Expect ['x', 'x', 'x', 'x', 'x']
+type Foo = Repeat<'x', 5> // Expect ['x', 'x', 'x', 'x', 'x']
 const foo: Foo = ['x', 'x', 'x', 'x', 'x']
 ```
 
