@@ -212,5 +212,4 @@ export namespace utils {
   }[
     TupleSet extends [] ? 'empty' : 'nonEmpty'
   ]
-
 }
