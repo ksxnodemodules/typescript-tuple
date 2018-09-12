@@ -8,6 +8,21 @@ Generics to work with tuples in TypeScript
 
 ## Usage
 
+### `IsFinite`
+
+```typescript
+import { IsFinite } from 'typescript-tuple'
+
+type Foo = IsFinite<[0, 1, 2]> // Expect: true
+const foo: Foo = true
+
+type Bar = IsFinite<[0, 1, 2, ...number[]]> // Expect: false
+const bar: Bar = false
+
+type Baz = IsFinite<[0, 1, 2], 'finite', 'infinite'> // Expect: 'finite'
+const baz: Baz = 'finite'
+```
+
 ### `First`
 
 ```typescript

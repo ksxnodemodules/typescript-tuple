@@ -1,6 +1,7 @@
 import assert from 'static-type-assert'
 
 import {
+  IsFinite,
   First,
   Last,
   Append,
@@ -11,11 +12,22 @@ import {
   ConcatMultiple
 } from './index'
 
+assert<IsFinite<[]>>(true)
+assert<IsFinite<[], 'finite', 'infinite'>>('finite')
+assert<IsFinite<'x'[]>>(false)
+assert<IsFinite<'x'[], 'finite', 'infinite'>>('infinite')
+assert<IsFinite<[0, 1, 2]>>(true)
+assert<IsFinite<[0, 1, 2], 'finite', 'infinite'>>('finite')
+assert<IsFinite<[0, 1, 2, ...number[]]>>(false)
+assert<IsFinite<[0, 1, 2, ...number[]], 'finite', 'infinite'>>('infinite')
+
 assert<First<['sole']>>('sole')
 assert<First<['first', 'middle', 'last']>>('first')
 
 assert<Last<['last']>>('last')
 assert<Last<['first', 'middle', 'last']>>('last')
+assert<Last<'last'[]>>('last')
+assert<Last<['first', ...'last'[]]>>('last')
 
 assert<Append<[], 'new'>>(['new'])
 assert<Append<['old'], 'new'>>(['old', 'new'])

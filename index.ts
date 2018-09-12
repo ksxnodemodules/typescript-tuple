@@ -1,4 +1,13 @@
 /**
+ * Choose type base on whether or not a tuple is finite
+ * @example `IsFinite<[0, 1, 2]>` → `true`
+ * @example `IsFinite<[0, 1, 2, ...number[]]>` → `false`
+ * @example `IsFinite<[0], 'Finite', 'Infinite'>` → `'Finite'`
+ * @example `IsFinite<[0, ...number[]], 'Finite', 'Infinite'>` → `Infinite`
+ */
+export type IsFinite<Tuple extends any[], Finite = true, Infinite = false> = utils.IsFinite<Tuple, Finite, Infinite>
+
+/**
  * Get type of first element
  * @example `First<[0, 1, 2]>` → `0`
  */
@@ -48,12 +57,33 @@ export type Repeat<Type, Count extends number> = utils.Repeat<Type, Count, []>
 export type ConcatMultiple<TupleSet extends any[][]> = utils.ConcatMultiple<TupleSet>
 
 export namespace utils {
+  export type IsFinite<Tuple extends any[], Finite, Infinite> = {
+    empty: Finite,
+    nonEmpty: ((..._: Tuple) => any) extends ((_: infer First, ..._1: infer Rest) => any)
+      ? IsFinite<Rest, Finite, Infinite>
+      : never,
+    infinite: Infinite
+  }[
+    Tuple extends [] ? 'empty' :
+    Tuple extends (infer Element)[] ?
+    Element[] extends Tuple ?
+      'infinite'
+    : 'nonEmpty'
+    : never
+  ]
+
   export type Last<Tuple extends any[], Default = never> = {
     empty: Default,
     single: Tuple extends [infer SoleElement] ? SoleElement : never,
-    multi: ((..._: Tuple) => any) extends ((_: any, ..._1: infer Next) => any) ? Last<Next> : Default
+    multi: ((..._: Tuple) => any) extends ((_: any, ..._1: infer Next) => any) ? Last<Next> : Default,
+    infinite: Tuple extends (infer Element)[] ? Element : never
   }[
-    Tuple extends [] ? 'empty' : Tuple extends [any] ? 'single' : 'multi'
+    Tuple extends [] ? 'empty' :
+    Tuple extends [any] ? 'single' :
+      Tuple extends (infer Element)[]
+        ? Element[] extends Tuple ? 'infinite'
+        : 'multi'
+    : never
   ]
 
   export type Prepend<Tuple extends any[], Addend> =
