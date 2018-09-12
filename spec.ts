@@ -11,7 +11,8 @@ import {
   Repeat,
   ConcatMultiple,
   SingleTupleSet,
-  FillTuple
+  FillTuple,
+  CompareLength
 } from './index'
 
 assert<IsFinite<[]>>(true)
@@ -76,3 +77,13 @@ assert<FillTuple<[], 'x'>>([])
 assert<FillTuple<[0, 1, 2], 'x'>>(['x', 'x', 'x'])
 assert<FillTuple<number[], 'x'>>([], ['x'], ['x', 'x'], ['x', 'x', 'x'], Array<'x'>())
 assert<FillTuple<[0, ...number[]], 'x'>>(['x'], ['x', 'x'], ['x', 'x', 'x'])
+
+assert<CompareLength<[], []>>('equal')
+assert<CompareLength<[], [0, 1, 2]>>('shorterLeft')
+assert<CompareLength<['a', 'b', 'c'], []>>('shorterRight')
+assert<CompareLength<['a', 'b'], [0, 1]>>('equal')
+assert<CompareLength<['a'], [0, 1, 2]>>('shorterLeft')
+assert<CompareLength<['a', 'b', 'c'], [0]>>('shorterRight')
+assert<CompareLength<['a', 'b'], [0, 1]>>('equal')
+assert<CompareLength<string[], number[]>>('equal')
+assert<CompareLength<['a', 'b', ...string[]], [0, 1, ...number[]]>>('equal')

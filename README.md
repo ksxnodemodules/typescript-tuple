@@ -123,6 +123,21 @@ type Foo = FillTuple<[0, 1, 2, 3], 'r'>
 const foo: Foo = ['r', 'r', 'r', 'r']
 ```
 
+### `CompareLength`
+
+```typescript
+import { CompareLength } from 'typescript-tuple'
+
+type Foo = CompareLength<[0, 1, 2], ['a', 'b', 'c']> // Expect: 'equal'
+const foo: Foo = 'equal'
+
+type Bar = CompareLength<[0, 1], ['a', 'b', 'c', 'd']> // Expect: 'shorterLeft'
+const bar: Bar = 'shorterLeft'
+
+type Baz = CompareLength<[0, 1, 2, 3], ['a', 'b']> // Expect: 'shorterRight'
+const baz: Baz = 'shorterRight'
+```
+
 ## License
 
 [MIT](https://git.io/fA2d9) @ [Hoàng Văn Khải](https://github.com/KSXGitHub)

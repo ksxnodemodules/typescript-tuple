@@ -70,6 +70,14 @@ export type SingleTupleSet<Types extends any[]> = utils.SingleTupleSet<Types>
  */
 export type FillTuple<Tuple extends any[], Replacement> = utils.FillTuple<Tuple, Replacement>
 
+/**
+ * Compare length of two tuple
+ * @example `CompareLength<[0, 1, 2], ['a', 'b', 'c']>` → `'equal'`
+ * @example `CompareLength<[0, 1], ['a', 'b', 'c']>` → `'shorterLeft'`
+ * @example `CompareLength<[0, 1, 2], ['a', 'b']>` → `'shorterRight'`
+ */
+export type CompareLength<Left extends any[], Right extends any[]> = utils.CompareLength<Left, Right>
+
 export namespace utils {
   export type IsFinite<Tuple extends any[], Finite, Infinite> = {
     empty: Finite,
