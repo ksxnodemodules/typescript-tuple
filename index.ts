@@ -111,9 +111,15 @@ export namespace utils {
       : never,
     multiLeft: ((..._: Reverse<Left>) => any) extends ((_: infer LeftLast, ..._1: infer ReversedLeftRest) => any)
       ? Concat<Reverse<ReversedLeftRest>, Prepend<Right, LeftLast>>
-      : never
+      : never,
+    infiniteLeft: {
+      ERROR: 'Left is not finite',
+      CODENAME: 'InfiniteLeft'
+    }
   }[
-    Left extends [] ? 'emptyLeft' : Left extends [any] ? 'singleLeft' : 'multiLeft'
+    Left extends [] ? 'emptyLeft' :
+    Left extends [any] ? 'singleLeft' :
+    IsFinite<Left, 'multiLeft', 'infiniteLeft'>
   ]
 
   export type Repeat<Type, Count extends number, Holder extends any[] = []> =
