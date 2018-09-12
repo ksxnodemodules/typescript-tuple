@@ -85,9 +85,14 @@ export namespace utils {
       ? Type[]
       : {
           fit: Holder,
-          unfit: Repeat<Type, Count, Prepend<Holder, Type>>
+          unfit: Repeat<Type, Count, Prepend<Holder, Type>>,
+          union: Type[]
         }[
-          Holder['length'] extends Count ? 'fit' : 'unfit'
+          Holder['length'] extends Count ? // It is possible for Count to be a union
+          Count extends Holder['length'] ? // Make sure that Count is not a union
+            'fit'
+          : 'union'
+          : 'unfit'
         ]
 
   export type ConcatMultiple<TupleSet extends any[][]> = {
