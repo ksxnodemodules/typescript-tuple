@@ -89,7 +89,7 @@ export namespace utils {
 
   export type ConcatMultiple<TupleSet extends any[][]> = {
     empty: [],
-    multi: ((..._: Reverse<TupleSet>) => any) extends ((_: infer Last, ..._1: infer ReversedRest) => any) ?
+    nonEmpty: ((..._: Reverse<TupleSet>) => any) extends ((_: infer Last, ..._1: infer ReversedRest) => any) ?
       Last extends any[] ?
       ReversedRest extends any[][] ?
         Concat<ConcatMultiple<Reverse<ReversedRest>>, Last> :
@@ -97,7 +97,7 @@ export namespace utils {
       never :
       never
   }[
-    TupleSet extends [] ? 'empty' : 'multi'
+    TupleSet extends [] ? 'empty' : 'nonEmpty'
   ]
 
   export type SingleTupleSet<Types extends any[], Holder extends [any][] = []> = {
