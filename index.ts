@@ -87,6 +87,12 @@ export type CompareLength<Left extends any[], Right extends any[]> = utils.Compa
  */
 export type SortTwoTuple<Left extends any[], Right extends any[], WhenEqual = [Left, Right]> = utils.SortTwoTuple<Left, Right, WhenEqual>
 
+/**
+ * Find shortest tuple in a set of tuples
+ * @example `ShortestTuple<[[0, 1, 2], [true, false], ['a', 'b', 'c', 'd']]>` → `[true, false]`
+ */
+export type ShortestTuple<TupleSet extends [any[], ...any[][]]> = utils.ShortestTuple<TupleSet>
+
 export namespace utils {
   export type IsFinite<Tuple extends any[], Finite, Infinite> = {
     empty: Finite,

@@ -13,7 +13,8 @@ import {
   SingleTupleSet,
   FillTuple,
   CompareLength,
-  SortTwoTuple
+  SortTwoTuple,
+  ShortestTuple
 } from './index'
 
 assert<IsFinite<[]>>(true)
@@ -93,3 +94,8 @@ assert<SortTwoTuple<[0, 1, 2, 3], ['a', 'b']>>([['a', 'b'], [0, 1, 2, 3]])
 assert<SortTwoTuple<[0, 1], ['a', 'b', 'c', 'd']>>([[0, 1], ['a', 'b', 'c', 'd']])
 assert<SortTwoTuple<[0, 1, 2], ['a', 'b', 'c']>>([[0, 1, 2], ['a', 'b', 'c']])
 assert<SortTwoTuple<[0, 1, 2], ['a', 'b', 'c'], 'EQUAL'>>('EQUAL')
+
+assert<ShortestTuple<[[0, 1, 2, 3]]>>([0, 1, 2, 3])
+assert<ShortestTuple<[[], [0], [1, 2], [3, 4, 5]]>>([])
+assert<ShortestTuple<[[0, 1, 2], [3, 4], [5], []]>>([])
+assert<ShortestTuple<[[0, 1, 2, 3, 4, 5], [true, false], ['a', 'b', 'c']]>>([true, false])

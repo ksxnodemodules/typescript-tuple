@@ -156,6 +156,14 @@ type Qux = SortTwoTuple<[0, 1, 2], ['a', 'b', 'c', 'd'], 'EQUAL'> // Expect: 'EQ
 const qux: Qux = 'EQUAL'
 ```
 
+### `ShortestTuple`
+
+```typescript
+import { ShortestTuple } from 'typescript-tuple'
+type Foo = ShortestTuple<[0, 1, 2, 3, 4, 5], [false, true], ['a', 'b', 'c', 'd']>
+const foo: Foo = [false, true]
+```
+
 ## License
 
 [MIT](https://git.io/fA2d9) @ [Hoàng Văn Khải](https://github.com/KSXGitHub)
