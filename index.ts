@@ -114,7 +114,7 @@ export namespace utils {
       : never,
     infiniteLeft: {
       ERROR: 'Left is not finite',
-      CODENAME: 'InfiniteLeft'
+      CODENAME: 'InfiniteLeft' & 'Infinite'
     }
   }[
     Left extends [] ? 'emptyLeft' :
@@ -149,9 +149,13 @@ export namespace utils {
         Concat<ConcatMultiple<Reverse<ReversedRest>>, Last> :
       never :
       never :
-      never
+      never,
+    infinite: {
+      ERROR: 'TupleSet is not finite',
+      CODENAME: 'InfiniteTupleSet' & 'Infinite'
+    }
   }[
-    TupleSet extends [] ? 'empty' : 'nonEmpty'
+    TupleSet extends [] ? 'empty' : IsFinite<TupleSet, 'nonEmpty', 'infinite'>
   ]
 
   export type SingleTupleSet<Types extends any[], Holder extends [any][] = []> = {
