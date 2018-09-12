@@ -9,7 +9,8 @@ import {
   Reverse,
   Concat,
   Repeat,
-  ConcatMultiple
+  ConcatMultiple,
+  SingleTupleSet
 } from './index'
 
 assert<IsFinite<[]>>(true)
@@ -64,3 +65,8 @@ assert<ConcatMultiple<[[], [], []]>>([])
 assert<ConcatMultiple<[[], [0], [1, 2], [3, 4, 5]]>>([0, 1, 2, 3, 4, 5])
 assert<ConcatMultiple<[['a', 'b'], ['A', 'B'], [0, 1], [true, false]]>>(['a', 'b', 'A', 'B', 0, 1, true, false])
 assert<ConcatMultiple<[[0, 1, 2, 3], [4, 5, 6], [7, 8], [9], []]>>([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+assert<SingleTupleSet<[]>>([])
+assert<SingleTupleSet<[0, 1, 2]>>([[0], [1], [2]])
+assert<SingleTupleSet<'x'[]>>(Array<['x']>(), [], [['x']], [['x'], ['x']])
+assert<SingleTupleSet<[0, ...'x'[]]>>([], [[0]], [[0], ['x'], ['x']])

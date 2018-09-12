@@ -103,6 +103,18 @@ type Foo = ConcatMultiple<[[], ['a'], ['b', 'c']]> // Expect ['a', 'b', 'c']
 const foo: Foo = ['a', 'b', 'c']
 ```
 
+### `SingleTupleSet`
+
+```typescript
+import { SingleTupleSet } from 'typescript-tuple'
+
+type Foo = SingleTupleSet<[0, 1, 2]> // Expect [[0], [1], [2]]
+const foo: Foo = [[0], [1], [2]]
+
+type Bar = SingleTupleSet<'x'[]> // Expect ['x'][]
+const bar: Bar = Array<['x']>()
+```
+
 ## License
 
 [MIT](https://git.io/fA2d9) @ [Hoàng Văn Khải](https://github.com/KSXGitHub)

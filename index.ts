@@ -56,6 +56,13 @@ export type Repeat<Type, Count extends number> = utils.Repeat<Type, Count, []>
  */
 export type ConcatMultiple<TupleSet extends any[][]> = utils.ConcatMultiple<TupleSet>
 
+/**
+ * Create a set of tuple of single element
+ * @example `SingleTupleSet<[0, 1, 2]>` → `[[0], [1], [2]]`
+ * @example `SingleTupleSet<[0, 1, 2, ...number[]]>` → `[[0], [1], [2], ...[number][]]`
+ */
+export type SingleTupleSet<Types extends any[]> = utils.SingleTupleSet<Types>
+
 export namespace utils {
   export type IsFinite<Tuple extends any[], Finite, Infinite> = {
     empty: Finite,
@@ -162,9 +169,12 @@ export namespace utils {
     empty: Holder,
     nonEmpty: ((..._: Reverse<Types>) => any) extends ((_: infer Last, ..._1: infer ReversedRest) => any)
       ? SingleTupleSet<Reverse<ReversedRest>, Prepend<Holder, [Last]>>
+      : never,
+    infinite: Types extends (infer Element)[]
+      ? [Element][]
       : never
   }[
-    Types extends [] ? 'empty' : 'nonEmpty'
+    Types extends [] ? 'empty' : IsFinite<Types, 'nonEmpty', 'infinite'>
   ]
 
   export type FillTuple<Tuple extends any[], Replacement, Holder extends any[] = []> = {
