@@ -24,7 +24,7 @@
   "homepage": "https://github.com/ksxnodemodules/typescript-tuple#readme",
   "devDependencies": {
     "typescript": "^3.0.3",
-    "static-type-assert": "^1.1.0"
+    "static-type-assert": "^1.2.0"
   },
   "peerDependencies": {
     "typescript": ">= 3.0.0"
