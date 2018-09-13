@@ -28,8 +28,8 @@ const baz: Baz = 'finite'
 ```typescript
 import { SplitInfiniteTuple } from 'typescript-tuple'
 type Foo = SplitInfiniteTuple<[0, 1, 2, ...number[]]> // Expect: [[0, 1, 2], number[]]
-type FinitePart = Foo[0]
-type InfinitePart = Foo[1]
+type FinitePart = Foo[0] // Expect: [0, 1, 2]
+type InfinitePart = Foo[1] // Expect: number[]
 const foo: Foo = [[0, 1, 2], Array<number>()]
 const finitePart: FinitePart = [0, 1, 2]
 const infinitePart: InfinitePart = Array<number>()
