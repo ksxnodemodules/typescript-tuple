@@ -225,8 +225,12 @@ export namespace utils {
     nonEmpty: ((..._: Reverse<Types>) => any) extends ((_: infer Last, ..._1: infer ReversedRest) => any)
       ? SingleTupleSet<Reverse<ReversedRest>, Prepend<Holder, [Last]>>
       : never,
-    infinite: Types extends (infer Element)[]
-      ? [Element][]
+    infinite: SplitInfiniteTuple<Types> extends [infer Finite, infer Infinite] ?
+      Finite extends any [] ?
+      Infinite extends (infer RepeatedElement)[] ?
+        SingleTupleSet<Finite, [RepeatedElement][]>
+      : never
+      : never
       : never
   }[
     Types extends [] ? 'empty' : IsFinite<Types, 'nonEmpty', 'infinite'>
