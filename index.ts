@@ -8,6 +8,12 @@
 export type IsFinite<Tuple extends any[], Finite = true, Infinite = false> = utils.IsFinite<Tuple, Finite, Infinite>
 
 /**
+ * Split an infinite tuple into a finite tuple and an array
+ * @example `SplitInfiniteTuple<[0, 1, 2, ...number[]]>` → `[[0, 1, 2], number[]]`
+ */
+export type SplitInfiniteTuple<Tuple extends any[]> = utils.SplitInfiniteTail<Tuple>
+
+/**
  * Get type of first element
  * @example `First<[0, 1, 2]>` → `0`
  */
@@ -106,6 +112,25 @@ export namespace utils {
     Element[] extends Tuple ?
       'infinite'
     : 'nonEmpty'
+    : never
+  ]
+
+  export type SplitInfiniteTail<Tuple extends any[]> =
+    _SplitInfiniteTail<Tuple> extends [infer Finite, infer Infinite] ?
+    Finite extends any[] ?
+      [Reverse<Finite>, Infinite]
+    : never
+    : never
+
+  export type _SplitInfiniteTail<Tuple extends any[], Holder extends any[] = []> = {
+    matched: [Holder, Tuple],
+    unmatched: ((..._: Tuple) => any) extends ((_: infer First, ..._1: infer Rest) => any)
+      ? _SplitInfiniteTail<Rest, Prepend<Holder, First>>
+      : never,
+    finite: [Tuple, []]
+  }[
+    Tuple extends (infer Element)[] ?
+      Element[] extends Tuple ? 'matched' : 'unmatched'
     : never
   ]
 

@@ -3,6 +3,7 @@ import compare = assert.compare
 
 import {
   IsFinite,
+  SplitInfiniteTuple,
   First,
   Last,
   Append,
@@ -26,6 +27,12 @@ compare<IsFinite<[0, 1, 2]>, true>('equal')
 compare<IsFinite<[0, 1, 2], 'finite', 'infinite'>, 'finite'>('equal')
 compare<IsFinite<[0, 1, 2, ...number[]]>, false>('equal')
 compare<IsFinite<[0, 1, 2, ...number[]], 'finite', 'infinite'>, 'infinite'>('equal')
+
+compare<SplitInfiniteTuple<'x'[]>, [[], 'x'[]]>('equal')
+compare<SplitInfiniteTuple<[0, 1, 2, ...'x'[]]>, [[0, 1, 2], 'x'[]]>('equal')
+compare<SplitInfiniteTuple<['x', 'x', ...'x'[]]>, [['x', 'x'], 'x'[]]>('equal')
+compare<SplitInfiniteTuple<[]>, never>('equal')
+compare<SplitInfiniteTuple<[0, 1, 2]>, never>('equal')
 
 compare<First<['sole']>, 'sole'>('equal')
 compare<First<['first', 'middle', 'last']>, 'first'>('equal')
