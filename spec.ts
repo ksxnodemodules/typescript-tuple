@@ -74,7 +74,7 @@ compare<ConcatMultiple<[[0, 1, 2, 3], [4, 5, 6], [7, 8], [9], []]>, [0, 1, 2, 3,
 compare<SingleTupleSet<[]>, []>('equal')
 compare<SingleTupleSet<[0, 1, 2]>, [[0], [1], [2]]>('equal')
 compare<SingleTupleSet<'x'[]>, ['x'][]>('equal')
-// compare<SingleTupleSet<[0, ...'x'[]]>, [[0], ...['x'][]]>('equal') // still failing
+compare<SingleTupleSet<[0, ...'x'[]]>, [[0], ...['x'][]]>('broaderLeft') // for now (ideal expectation: 'equal')
 
 compare<FillTuple<[], 'x'>, []>('equal')
 compare<FillTuple<[0, 1, 2], 'x'>, ['x', 'x', 'x']>('equal')
