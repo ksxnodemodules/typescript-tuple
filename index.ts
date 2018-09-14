@@ -299,7 +299,6 @@ export namespace utils {
     TupleSet extends [] ? 'empty' : IsFinite<TupleSet, 'nonEmpty', 'infinite'>
   ]
 
-<<<<<<< HEAD
   export type ZipPairWithShorterLeft<Left extends any[], Right extends any[], Holder extends any[][] = []> = {
     empty: Holder,
     nonEmpty: ((..._: Reverse<Left>) => any) extends ((_: infer LeftLast, ..._1: infer ReversedLeftRest) => any) ?
@@ -349,7 +348,6 @@ export namespace utils {
 
   export type ZipByShortest<TupleSet extends any[][], Holder extends any[][] = []> = {
   }
-=======
   export type RangeZeroAsc<
     Count extends number,
     Holder extends any[] = [],
@@ -391,5 +389,4 @@ export namespace utils {
     : 'union'
     : 'unfit'
   ]
->>>>>>> master
 }
