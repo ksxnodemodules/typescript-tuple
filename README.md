@@ -176,6 +176,34 @@ type Foo = ShortestTuple<[0, 1, 2, 3, 4, 5], [false, true], ['a', 'b', 'c', 'd']
 const foo: Foo = [false, true]
 ```
 
+### `RangeZeroAsc`
+
+```typescript
+import { RangeZeroAsc } from 'typescript-tuple'
+
+type Foo = RangeZeroAsc<5> // Expect: [0, 1, 2, 3, 4]
+const foo: Foo = [0, 1, 2, 3, 4]
+
+type Bar = RangeZeroAsc<1 | 3 | 5> // Expect: [0] | [0, 1, 2] | [0, 1, 2, 3, 4]
+const bar1: Bar = [0]
+const bar3: Bar = [0, 1, 2]
+const bar5: Bar = [0, 1, 2, 3, 4]
+```
+
+### `RangeZeroDesc`
+
+```typescript
+import { RangeZeroAsc } from 'typescript-tuple'
+
+type Foo = RangeZeroAsc<5> // Expect: [0, 1, 2, 3, 4]
+const foo: Foo = [0, 1, 2, 3, 4]
+
+type Bar = RangeZeroAsc<1 | 3 | 5> // Expect: [0] | [0, 1, 2] | [0, 1, 2, 3, 4]
+const bar1: Bar = [0]
+const bar3: Bar = [0, 1, 2]
+const bar5: Bar = [0, 1, 2, 3, 4]
+```
+
 ## License
 
 [MIT](https://git.io/fA2d9) @ [Hoàng Văn Khải](https://github.com/KSXGitHub)

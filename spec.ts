@@ -16,7 +16,9 @@ import {
   FillTuple,
   CompareLength,
   SortTwoTuple,
-  ShortestTuple
+  ShortestTuple,
+  RangeZeroAsc,
+  RangeZeroDesc
 } from './index'
 
 compare<IsFinite<[]>, true>('equal')
@@ -106,3 +108,13 @@ compare<ShortestTuple<[[0, 1, 2, 3]]>, [0, 1, 2, 3]>('equal')
 compare<ShortestTuple<[[], [0], [1, 2], [3, 4, 5]]>, []>('equal')
 compare<ShortestTuple<[[0, 1, 2], [3, 4], [5], []]>, []>('equal')
 compare<ShortestTuple<[[0, 1, 2, 3, 4, 5], [true, false], ['a', 'b', 'c']]>, [true, false]>('equal')
+
+compare<RangeZeroAsc<0>, []>('equal')
+compare<RangeZeroAsc<1>, [0]>('equal')
+compare<RangeZeroAsc<5>, [0, 1, 2, 3, 4]>('equal')
+compare<RangeZeroAsc<2 | 3 | 5>, [0, 1] | [0, 1, 2] | [0, 1, 2, 3, 4]>('equal')
+
+compare<RangeZeroDesc<0>, []>('equal')
+compare<RangeZeroDesc<1>, [0]>('equal')
+compare<RangeZeroDesc<5>, [4, 3, 2, 1, 0]>('equal')
+compare<RangeZeroDesc<2 | 3 | 5>, [1, 0] | [2, 1, 0] | [4, 3, 2, 1, 0]>('equal')

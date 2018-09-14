@@ -99,6 +99,18 @@ export type SortTwoTuple<Left extends any[], Right extends any[], WhenEqual = [L
  */
 export type ShortestTuple<TupleSet extends [any[], ...any[][]]> = utils.ShortestTuple<TupleSet>
 
+/**
+ * Create a tuple of ascending integers
+ * @example `RangeZeroAsc<5>` → `[0, 1, 2, 3, 4]`
+ */
+export type RangeZeroAsc<Count extends number> = utils.RangeZeroAsc<Count>
+
+/**
+ * Create a tuple of descending integers
+ * @example `RangeZeroDesc<5>` → `[4, 3, 2, 1, 0]`
+ */
+export type RangeZeroDesc<Count extends number> = utils.RangeZeroDesc<Count>
+
 export namespace utils {
   export type IsFinite<Tuple extends any[], Finite, Infinite> = {
     empty: Finite,
@@ -285,5 +297,47 @@ export namespace utils {
     }
   }[
     TupleSet extends [] ? 'empty' : IsFinite<TupleSet, 'nonEmpty', 'infinite'>
+  ]
+
+  export type RangeZeroAsc<
+    Count extends number,
+    Holder extends any[] = [],
+  > = {
+    fit: Holder,
+    unfit: RangeZeroAsc<Count, Append<Holder, Holder['length']>>,
+    infinite: number[],
+    union: Count extends Holder['length'] | infer Rest ?
+      Rest extends number ?
+        RangeZeroAsc<Holder['length']> | RangeZeroAsc<Rest>
+      : never
+      : never
+  }[
+    number extends Holder['length'] ? 'infinite' :
+    Holder['length'] extends Count ?
+    Count extends Holder['length'] ?
+      'fit'
+    : 'union'
+    : 'unfit'
+  ]
+
+  export type RangeZeroDesc<
+    Count extends number,
+    Holder extends any[] = [],
+  > = {
+    fit: Holder,
+    unfit: RangeZeroDesc<Count, Prepend<Holder, Holder['length']>>,
+    infinite: number[],
+    union: Count extends Holder['length'] | infer Rest ?
+      Rest extends number ?
+        RangeZeroDesc<Holder['length']> | RangeZeroDesc<Rest>
+      : never
+      : never
+  }[
+    number extends Holder['length'] ? 'infinite' :
+    Holder['length'] extends Count ?
+    Count extends Holder['length'] ?
+      'fit'
+    : 'union'
+    : 'unfit'
   ]
 }
