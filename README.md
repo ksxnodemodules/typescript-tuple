@@ -23,6 +23,18 @@ type Baz = IsFinite<[0, 1, 2], 'finite', 'infinite'> // Expect: 'finite'
 const baz: Baz = 'finite'
 ```
 
+### `SplitInfiniteTuple`
+
+```typescript
+import { SplitInfiniteTuple } from 'typescript-tuple'
+type Foo = SplitInfiniteTuple<[0, 1, 2, ...number[]]> // Expect: [[0, 1, 2], number[]]
+type FinitePart = Foo[0] // Expect: [0, 1, 2]
+type InfinitePart = Foo[1] // Expect: number[]
+const foo: Foo = [[0, 1, 2], Array<number>()]
+const finitePart: FinitePart = [0, 1, 2]
+const infinitePart: InfinitePart = Array<number>()
+```
+
 ### `First`
 
 ```typescript
@@ -162,6 +174,34 @@ const qux: Qux = 'EQUAL'
 import { ShortestTuple } from 'typescript-tuple'
 type Foo = ShortestTuple<[0, 1, 2, 3, 4, 5], [false, true], ['a', 'b', 'c', 'd']>
 const foo: Foo = [false, true]
+```
+
+### `RangeZeroAsc`
+
+```typescript
+import { RangeZeroAsc } from 'typescript-tuple'
+
+type Foo = RangeZeroAsc<5> // Expect: [0, 1, 2, 3, 4]
+const foo: Foo = [0, 1, 2, 3, 4]
+
+type Bar = RangeZeroAsc<1 | 3 | 5> // Expect: [0] | [0, 1, 2] | [0, 1, 2, 3, 4]
+const bar1: Bar = [0]
+const bar3: Bar = [0, 1, 2]
+const bar5: Bar = [0, 1, 2, 3, 4]
+```
+
+### `RangeZeroDesc`
+
+```typescript
+import { RangeZeroAsc } from 'typescript-tuple'
+
+type Foo = RangeZeroAsc<5> // Expect: [0, 1, 2, 3, 4]
+const foo: Foo = [0, 1, 2, 3, 4]
+
+type Bar = RangeZeroAsc<1 | 3 | 5> // Expect: [0] | [0, 1, 2] | [0, 1, 2, 3, 4]
+const bar1: Bar = [0]
+const bar3: Bar = [0, 1, 2]
+const bar5: Bar = [0, 1, 2, 3, 4]
 ```
 
 ## License

@@ -8,6 +8,12 @@
 export type IsFinite<Tuple extends any[], Finite = true, Infinite = false> = utils.IsFinite<Tuple, Finite, Infinite>
 
 /**
+ * Split an infinite tuple into a finite tuple and an array
+ * @example `SplitInfiniteTuple<[0, 1, 2, ...number[]]>` → `[[0, 1, 2], number[]]`
+ */
+export type SplitInfiniteTuple<Tuple extends any[]> = utils.SplitInfiniteTail<Tuple>
+
+/**
  * Get type of first element
  * @example `First<[0, 1, 2]>` → `0`
  */
@@ -93,6 +99,18 @@ export type SortTwoTuple<Left extends any[], Right extends any[], WhenEqual = [L
  */
 export type ShortestTuple<TupleSet extends [any[], ...any[][]]> = utils.ShortestTuple<TupleSet>
 
+/**
+ * Create a tuple of ascending integers
+ * @example `RangeZeroAsc<5>` → `[0, 1, 2, 3, 4]`
+ */
+export type RangeZeroAsc<Count extends number> = utils.RangeZeroAsc<Count>
+
+/**
+ * Create a tuple of descending integers
+ * @example `RangeZeroDesc<5>` → `[4, 3, 2, 1, 0]`
+ */
+export type RangeZeroDesc<Count extends number> = utils.RangeZeroDesc<Count>
+
 export namespace utils {
   export type IsFinite<Tuple extends any[], Finite, Infinite> = {
     empty: Finite,
@@ -106,6 +124,25 @@ export namespace utils {
     Element[] extends Tuple ?
       'infinite'
     : 'nonEmpty'
+    : never
+  ]
+
+  export type SplitInfiniteTail<Tuple extends any[]> =
+    _SplitInfiniteTail<Tuple> extends [infer Finite, infer Infinite] ?
+    Finite extends any[] ?
+      [Reverse<Finite>, Infinite]
+    : never
+    : never
+
+  export type _SplitInfiniteTail<Tuple extends any[], Holder extends any[] = []> = {
+    matched: [Holder, Tuple],
+    unmatched: ((..._: Tuple) => any) extends ((_: infer First, ..._1: infer Rest) => any)
+      ? _SplitInfiniteTail<Rest, Prepend<Holder, First>>
+      : never,
+    finite: [Tuple, []]
+  }[
+    Tuple extends (infer Element)[] ?
+      Element[] extends Tuple ? 'matched' : 'unmatched'
     : never
   ]
 
@@ -200,8 +237,12 @@ export namespace utils {
     nonEmpty: ((..._: Reverse<Types>) => any) extends ((_: infer Last, ..._1: infer ReversedRest) => any)
       ? SingleTupleSet<Reverse<ReversedRest>, Prepend<Holder, [Last]>>
       : never,
-    infinite: Types extends (infer Element)[]
-      ? [Element][]
+    infinite: SplitInfiniteTuple<Types> extends [infer Finite, infer Infinite] ?
+      Finite extends any [] ?
+      Infinite extends (infer RepeatedElement)[] ?
+        SingleTupleSet<Finite, [RepeatedElement][]>
+      : never
+      : never
       : never
   }[
     Types extends [] ? 'empty' : IsFinite<Types, 'nonEmpty', 'infinite'>
@@ -258,6 +299,7 @@ export namespace utils {
     TupleSet extends [] ? 'empty' : IsFinite<TupleSet, 'nonEmpty', 'infinite'>
   ]
 
+<<<<<<< HEAD
   export type ZipPairWithShorterLeft<Left extends any[], Right extends any[], Holder extends any[][] = []> = {
     empty: Holder,
     nonEmpty: ((..._: Reverse<Left>) => any) extends ((_: infer LeftLast, ..._1: infer ReversedLeftRest) => any) ?
@@ -307,4 +349,47 @@ export namespace utils {
 
   export type ZipByShortest<TupleSet extends any[][], Holder extends any[][] = []> = {
   }
+=======
+  export type RangeZeroAsc<
+    Count extends number,
+    Holder extends any[] = [],
+  > = {
+    fit: Holder,
+    unfit: RangeZeroAsc<Count, Append<Holder, Holder['length']>>,
+    infinite: number[],
+    union: Count extends Holder['length'] | infer Rest ?
+      Rest extends number ?
+        RangeZeroAsc<Holder['length']> | RangeZeroAsc<Rest>
+      : never
+      : never
+  }[
+    number extends Holder['length'] ? 'infinite' :
+    Holder['length'] extends Count ?
+    Count extends Holder['length'] ?
+      'fit'
+    : 'union'
+    : 'unfit'
+  ]
+
+  export type RangeZeroDesc<
+    Count extends number,
+    Holder extends any[] = [],
+  > = {
+    fit: Holder,
+    unfit: RangeZeroDesc<Count, Prepend<Holder, Holder['length']>>,
+    infinite: number[],
+    union: Count extends Holder['length'] | infer Rest ?
+      Rest extends number ?
+        RangeZeroDesc<Holder['length']> | RangeZeroDesc<Rest>
+      : never
+      : never
+  }[
+    number extends Holder['length'] ? 'infinite' :
+    Holder['length'] extends Count ?
+    Count extends Holder['length'] ?
+      'fit'
+    : 'union'
+    : 'unfit'
+  ]
+>>>>>>> master
 }
