@@ -1,21 +1,21 @@
 devDependencies:
-  static-type-assert: 2.0.0
+  static-type-assert: 3.0.0
   typescript: 3.0.3
 packages:
-  /static-type-assert/2.0.0:
+  /static-type-assert/3.0.0:
     dependencies:
-      typescript-compare: 0.0.0
+      typescript-compare: 0.0.2
     dev: true
     peerDependencies:
       typescript: ^3.0.3
     resolution:
-      integrity: sha512-uILFDti9+qLpmZyfqSNSmySwI1B6Q3CxRWhijWtDNs78GCqrLjVxuN0GXeAsKFolOxuAGEtP/QOftR44+vLehA==
-  /typescript-compare/0.0.0:
+      integrity: sha512-ot2MBauEvaNIh9bwGDSAB1pIVQBjzRb99DH8Y+/mrYNd0d4kAVsAIR8RfSZtHsf9/G5qaaIf1a+Irn5Via8zVg==
+  /typescript-compare/0.0.2:
     dependencies:
       typescript-logic: 0.0.0
     dev: true
     resolution:
-      integrity: sha512-WuGIIbeH6s6i06WaExp0hrtiHC6L34+HDGQdm8HnKhEuOws36TXubri7L6nOQz1GFaRfR2xY94L+bojDnkEaww==
+      integrity: sha512-8ja4j7pMHkfLJQO2/8tut7ub+J3Lw2S3061eJLFQcvs3tsmJKp8KG5NtpLn7KcY2w08edF74BSVN7qJS0U6oHA==
   /typescript-logic/0.0.0:
     dev: true
     resolution:
@@ -31,5 +31,5 @@ registry: 'https://registry.npmjs.org/'
 shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
-  static-type-assert: ^2.0.0
+  static-type-assert: ^3.0.0
   typescript: ^3.0.3
