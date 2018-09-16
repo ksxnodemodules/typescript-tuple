@@ -274,16 +274,14 @@ export namespace utils {
       Tail extends any[] ?
       Shortest extends any[] ?
       Head extends any[] ?
-        ShortestTuple<Tail, SortTwoTuple<Shortest, Head>[0]>
+        Tail extends Head[]
+          ? SortTwoTuple<Shortest, Head>[0]
+          : ShortestTuple<Tail, SortTwoTuple<Shortest, Head>[0]>
       : never
       : never
       : never
-      : never,
-    infinite: {
-      ERROR: 'TupleSet is not finite',
-      CODENAME: 'InfiniteTupleSet' & 'Infinite'
-    }
+      : never
   }[
-    TupleSet extends [] ? 'empty' : IsFinite<TupleSet, 'nonEmpty', 'infinite'>
+    TupleSet extends [] ? 'empty' : 'nonEmpty'
   ]
 }
