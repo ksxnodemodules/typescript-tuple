@@ -104,6 +104,7 @@ compare<SortTwoTuple<[0, 1], ['a', 'b', 'c', 'd']>, [[0, 1], ['a', 'b', 'c', 'd'
 compare<SortTwoTuple<[0, 1, 2], ['a', 'b', 'c']>, [[0, 1, 2], ['a', 'b', 'c']]>('equal')
 
 compare<ShortestTuple<[[0, 1, 2, 3]]>, [0, 1, 2, 3]>('equal')
+compare<ShortestTuple<['x'[]]>, 'x'[] | any[]>('broaderRight')
 compare<ShortestTuple<[[], [0], [1, 2], [3, 4, 5]]>, []>('equal')
 compare<ShortestTuple<[[0, 1, 2], [3, 4], [5], []]>, []>('equal')
 compare<ShortestTuple<[[0, 1, 2, 3, 4, 5], [true, false], ['a', 'b', 'c']]>, [true, false]>('equal')
@@ -112,6 +113,10 @@ compare<ShortestTuple<[[0, 1, 2, 3], ['a', 'b', 'c'], ...[true, false][]]>, [tru
 compare<ShortestTuple<[[0], ['a', 'b'], ...[0, 1, 2][]]>, [0]>('equal')
 
 compare<LongestTuple<[[0, 1, 2, 3]]>, [0, 1, 2, 3]>("equal")
+compare<LongestTuple<['x'[]]>, 'x'[]>('equal')
+compare<LongestTuple<[[], [0, 1], [2, 3, 4], 'x'[]]>, 'x'[]>('equal')
+compare<LongestTuple<['x'[], ...[0, 1, 2][]]>, 'x'[]>('equal')
+compare<LongestTuple<[[], [0, 1], ...'x'[][]]>, 'x'[]>('equal')
 compare<LongestTuple<[[], [0], [1, 2], [3, 4, 5]]>, [3, 4, 5]>('equal')
 compare<LongestTuple<[[0, 1, 2], [3, 4], [5], []]>, [0, 1, 2]>('equal')
 compare<LongestTuple<[[0, 1, 2, 3, 4, 5], [true, false], ['a', 'b', 'c']]>, [0, 1, 2, 3, 4, 5]>('equal')
