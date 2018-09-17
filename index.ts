@@ -99,7 +99,6 @@ export type SortTwoTuple<Left extends any[], Right extends any[], WhenEqual = [L
  */
 export type ShortestTuple<TupleSet extends [any[], ...any[][]]> = utils.ShortestTuple<TupleSet>
 
-
 /**
  * Find shortest tuple in a set of tuples
  * @example `LongestTuple<[[0, 1, 2], [true, false], ['a', 'b', 'c', 'd']]>` → `['a', 'b', 'c', 'd']`
