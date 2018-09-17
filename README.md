@@ -173,10 +173,10 @@ const qux: Qux = 'EQUAL'
 ```typescript
 import { ShortestTuple } from 'typescript-tuple'
 
-type Foo = ShortestTuple<[0, 1, 2, 3, 4, 5], [false, true], ['a', 'b', 'c', 'd']>
+type Foo = ShortestTuple<[[0, 1, 2], [false, true], ['a', 'b', 'c', 'd']]> // Expect: [false, true]
 const foo: Foo = [false, true]
 
-type Bar = ShortestTuple<[0, 1, 2], ['a', 'b', 'c'], ...[false, true][]>
+type Bar = ShortestTuple<[[0, 1, 2], ['a', 'b', 'c'], ...[false, true][]]> // Expect: [false, true]
 const bar: Bar = [false, true]
 ```
 
