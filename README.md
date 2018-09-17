@@ -180,6 +180,18 @@ type Bar = ShortestTuple<[0, 1, 2], ['a', 'b', 'c'], ...[false, true][]>
 const bar: Bar = [false, true]
 ```
 
+### `LongestTuple`
+
+```typescript
+import { LongestTuple } from 'typescript-tuple'
+
+type Foo = LongestTuple<[[0, 1, 2, 3], [false, true], ['a']]> // Expect: [0, 1, 2, 3]
+const foo: Foo = [0, 1, 2, 3]
+
+type Bar = LongestTuple<[[], [false, true], ...[0, 1, 2][]]> // Expect: [0, 1, 2]
+const bar: Bar = [0, 1, 2]
+```
+
 ## License
 
 [MIT](https://git.io/fA2d9) @ [Hoàng Văn Khải](https://github.com/KSXGitHub)

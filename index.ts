@@ -99,6 +99,13 @@ export type SortTwoTuple<Left extends any[], Right extends any[], WhenEqual = [L
  */
 export type ShortestTuple<TupleSet extends [any[], ...any[][]]> = utils.ShortestTuple<TupleSet>
 
+
+/**
+ * Find shortest tuple in a set of tuples
+ * @example `LongestTuple<[[0, 1, 2], [true, false], ['a', 'b', 'c', 'd']]>` → `['a', 'b', 'c', 'd']`
+ */
+export type LongestTuple<TupleSet extends [any[], ...any[][]]> = utils.LongestTuple<TupleSet>
+
 export namespace utils {
   export type IsFinite<Tuple extends any[], Finite, Infinite> = {
     empty: Finite,
@@ -277,6 +284,23 @@ export namespace utils {
         Tail extends Head[]
           ? SortTwoTuple<Shortest, Head>[0]
           : ShortestTuple<Tail, SortTwoTuple<Shortest, Head>[0]>
+      : never
+      : never
+      : never
+      : never
+  }[
+    TupleSet extends [] ? 'empty' : 'nonEmpty'
+  ]
+
+  export type LongestTuple<TupleSet extends any[][], Longest = []> = {
+    empty: Longest,
+    nonEmpty: ((..._: TupleSet) => any) extends ((_: infer Head, ..._1: infer Tail) => any) ?
+      Tail extends any[] ?
+      Longest extends any[] ?
+      Head extends any[] ?
+        Tail extends Head[]
+          ? SortTwoTuple<Longest, Head>[1]
+          : LongestTuple<Tail, SortTwoTuple<Longest, Head>[1]>
       : never
       : never
       : never
