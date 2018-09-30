@@ -26,7 +26,7 @@
     "typescript": "^3.0.3",
     "static-type-assert": "^3.0.0"
   },
-  "peerDependencies": {
-    "typescript": ">= 3.0.0"
+  "engines": {
+    "typescript": "^3.0.0"
   }
 }
