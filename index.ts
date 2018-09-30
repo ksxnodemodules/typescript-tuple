@@ -191,6 +191,7 @@ export namespace utils {
   ]
 
   export type Repeat<Type, Count extends number, Holder extends any[] = []> =
+    Count extends never ? never :
     number extends Count
       ? Type[]
       : {
