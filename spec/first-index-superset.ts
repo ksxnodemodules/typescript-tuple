@@ -3,7 +3,7 @@ import compare = assert.compare
 import { FirstIndexSuperset } from '..'
 
 compare<
-  FirstIndexSuperset<'x', [number, symbol, string, boolean]>,
+  FirstIndexSuperset<'x', [number, symbol, string, boolean, 'x']>,
   2
 >('equal')
 
