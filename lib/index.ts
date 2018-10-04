@@ -28,6 +28,78 @@ export type First<Tuple extends [any, ...any[]]> = Tuple[0]
 export type Last<Tuple extends any[]> = utils.Last<Tuple>
 
 /**
+ * Find index of a type in tuple
+ * @example FirstIndexEqual<'x', ['a', 'b', 'c', 'x', 'd']> → 3
+ * @example FirstIndexEqual<'x', ['a', 'b', 'c']> → never
+ * @example FirstIndexEqual<'x', ['a', 'b', 'c'], 'NotFound'> → 'NotFound'
+ */
+export type FirstIndexEqual<Type, Tuple extends any[], NotFound = never> =
+  utils.FirstIndexEqual<Type, Tuple, NotFound>
+
+/**
+ * Find index of the first element in tuple that satifies a type
+ * @example FirstIndexSubset<string, [true, false, 'x', 3]> → 2
+ * @example FirstIndexSubset<string, [true, false, 0, 1]> → never
+ * @example FirstIndexSubset<string, [true, false, 0, 1], 'NotFound'> → 'NotFound'
+ */
+export type FirstIndexSubset<Type, Tuple extends any[], NotFound = never> =
+  utils.FirstIndexSubset<Type, Tuple, NotFound>
+
+/**
+ * Find index of the first element in tuple that satifies a type
+ * @example FirstIndexSuperset<5, [boolean, string, number, object]> → 2
+ * @example FirstIndexSuperset<5, [boolean, string, object]> → never
+ * @example FirstIndexSuperset<5, [boolean, string, object], 'NotFound'> → 'NotFound'
+ */
+export type FirstIndexSuperset<Type, Tuple extends any[], NotFound = never> =
+  utils.FirstIndexSuperset<Type, Tuple, NotFound>
+
+/**
+ * Find index of a type in tuple
+ * @example LastIndexEqual<'x', ['a', 'b', 'c', 'x', 'd']> → 3
+ * @example LastIndexEqual<'x', ['a', 'b', 'c']> → never
+ * @example LastIndexEqual<'x', ['a', 'b', 'c'], 'NotFound'> → 'NotFound'
+ */
+export type LastIndexEqual<Type, Tuple extends any[], NotFound = never> =
+  utils.LastIndexEqual<Type, Tuple, NotFound>
+
+/**
+ * Find index of the first element in tuple that satifies a type
+ * @example LastIndexSubset<string, [true, false, 'x', 3]> → 2
+ * @example LastIndexSubset<string, [true, false, 0, 1]> → never
+ * @example LastIndexSubset<string, [true, false, 0, 1], 'NotFound'> → 'NotFound'
+ */
+export type LastIndexSubset<Type, Tuple extends any[], NotFound = never> =
+  utils.LastIndexSubset<Type, Tuple, NotFound>
+
+/**
+ * Find index of the first element in tuple that satifies a type
+ * @example LastIndexSuperset<5, [boolean, string, number, object]> → 2
+ * @example LastIndexSuperset<5, [boolean, string, object]> → never
+ * @example LastIndexSuperset<5, [boolean, string, object], 'NotFound'> → 'NotFound'
+ */
+export type LastIndexSuperset<Type, Tuple extends any[], NotFound = never> =
+  utils.LastIndexSuperset<Type, Tuple, NotFound>
+
+/**
+ * Find all indexes of a type in tuple
+ * @example IndexesEqual<'x', ['a', 'b', 'x', 'c', 'x', 'x']> → [2, 4, 5]
+ */
+export type IndexesEqual<Type, Tuple extends any[]> = utils.IndexesEqual<Type, Tuple>
+
+/**
+ * Find all indexes of a type in tuple
+ * @example IndexesSubset<'x', ['a', 'b', 'x', 'c', 'x', 'x']> → [2, 4, 5]
+ */
+export type IndexesSubset<Type, Tuple extends any[]> = utils.IndexesSubset<Type, Tuple>
+
+/**
+ * Find all indexes of a type in tuple
+ * @example IndexesSuperset<'x', ['a', 'b', 'x', 'c', 'x', 'x']> → [2, 4, 5]
+ */
+export type IndexesSuperset<Type, Tuple extends any[]> = utils.IndexesSuperset<Type, Tuple>
+
+/**
  * Add an element to the end of a tuple
  * @example Append<[0, 1, 2], 'new'> → [0, 1, 2, 'new']
  */
