@@ -30,3 +30,4 @@ spec.d.ts
 *.js.map
 *.d.ts.map
 /TODO
+.toolcheckrc*
