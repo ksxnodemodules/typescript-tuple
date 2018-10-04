@@ -147,6 +147,24 @@ export type _LastIndexFirst<Tuple extends any[], NotFound> = IsFinite<
   : never
 >
 
+export type _IndexesNormalize<Indexes extends any[]> = IsFinite<
+  Indexes,
+
+  Indexes extends any[]
+    ? Reverse<Indexes>
+    : never,
+
+  SplitInfiniteTuple<Indexes> extends [infer Finite, infer Infinite] ?
+  Finite extends any[] ?
+  ((..._: Finite) => any) extends ((..._: infer Alt) => any) ?
+  Infinite extends any[] ?
+    Concat<Reverse<Alt>, Infinite>
+  : never
+  : never
+  : never
+  : never
+>
+
 export type _IndexesEqual<
   Type,
   Tuple extends any[],
