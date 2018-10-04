@@ -26,6 +26,7 @@
   "devDependencies": {
     "typescript": "^3.1.1",
     "static-type-assert": "^3.0.0",
+    "toolcheck": "^0.0.5",
     "clean-typescript-build": "^0.0.7"
   },
   "engines": {
