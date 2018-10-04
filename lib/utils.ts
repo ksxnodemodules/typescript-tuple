@@ -65,7 +65,9 @@ export type FirstIndexEqual<
       FirstIndexEqual<
         Type,
         Finite,
-        Equal<Infinite, Type[]> extends true ? Finite['length'] : NotFound
+        Infinite extends Type[] ? Type[] extends Infinite ?
+          Finite['length']
+        : NotFound : NotFound
       >
     : never
     : never
@@ -90,7 +92,7 @@ export type FirstIndexSubset<
       FirstIndexSubset<
         Type,
         Finite,
-        Extends<Infinite, Type[]> extends true ? Finite['length'] : NotFound
+        Infinite extends Type[] ? Finite['length'] : NotFound
       >
     : never
     : never
