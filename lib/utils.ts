@@ -157,7 +157,7 @@ export type IndexesEqual<
       IndexesEqual<
         Type,
         Finite,
-        Equal<Last, Type> extends true ? [Finite['length']] : []
+        Equal<Last, Type> extends true ? Finite['length'][] : []
       >
     : never
     : never
@@ -189,7 +189,7 @@ export type IndexesSubset<
       IndexesSubset<
         Type,
         Finite,
-        Extends<Last, Type> extends true ? [Finite['length']] : []
+        Extends<Last, Type> extends true ? Finite['length'][] : []
       >
     : never
     : never
@@ -221,7 +221,7 @@ export type IndexesSuperset<
       IndexesSuperset<
         Type,
         Finite,
-        Type extends Last ? [Finite['length']] : []
+        Type extends Last ? Finite['length'][] : []
       >
     : never
     : never
