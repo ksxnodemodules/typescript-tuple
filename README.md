@@ -51,6 +51,90 @@ type Foo = Last<['a', 'b', 'c']> // Expect: 'c'
 const foo: Foo = 'c'
 ```
 
+### `FirstIndexEqual`
+
+```typescript
+import { FirstIndexEqual } from 'typescript-tuple'
+
+type Foo = FirstIndexEqual<'x', ['a', 'x', 'b', 'x']> // Expect: 1
+const foo: Foo = 1
+
+type Bar = FirstIndexEqual<'x', ['a', 'b']> // Expect: never
+
+type Baz = FirstIndexEqual<'x', ['a', 'b'], 'not found'> // Expect: 'not found'
+const baz: Baz = 'not found'
+```
+
+### `FirstIndexSubset`
+
+```typescript
+import { FirstIndexSubset } from 'typescript-tuple'
+
+type Foo = FirstIndexSubset<string, [0, 'a', 1, 'b']> // Expect: 1
+const foo: Foo = 1
+
+type Bar = FirstIndexSubset<string, [0, 1]> // Expect: never
+
+type Baz = FirstIndexSubset<string, [0, 1], 'not found'> // Expect: 'not found'
+const baz: Baz = 'not found'
+```
+
+### `FirstIndexSuperset`
+
+```typescript
+import { FirstIndexSuperset } from 'typescript-tuple'
+
+type Foo = FirstIndexSuperset<'x', [number, string, 0 | 1, 'x' | 'y']> // Expect: 1
+const foo: Foo = 1
+
+type Bar = FirstIndexSuperset<'x', [number, 0 | 1]> // Expect: never
+
+type Baz = FirstIndexSuperset<'x', [number, 0 | 1], 'not found'> // Expect: 'not found'
+const baz: Baz = 'not found'
+```
+
+### `LastIndexEqual`
+
+```typescript
+import { LastIndexEqual } from 'typescript-tuple'
+
+type Foo = LastIndexEqual<'x', ['a', 'x', 'b', 'x']> // Expect: 3
+const foo: Foo = 3
+
+type Bar = LastIndexEqual<'x', ['a', 'b']> // Expect: never
+
+type Baz = LastIndexEqual<'x', ['a', 'b'], 'not found'> // Expect: 'not found'
+const baz: Baz = 'not found'
+```
+
+### `LastIndexSubset`
+
+```typescript
+import { LastIndexSubset } from 'typescript-tuple'
+
+type Foo = LastIndexSubset<string, [0, 'a', 1, 'b']> // Expect: 3
+const foo: Foo = 3
+
+type Bar = LastIndexSubset<string, [0, 1]> // Expect: never
+
+type Baz = LastIndexSubset<string, [0, 1], 'not found'> // Expect: 'not found'
+const baz: Baz = 'not found'
+```
+
+### `LastIndexSuperset`
+
+```typescript
+import { LastIndexSuperset } from 'typescript-tuple'
+
+type Foo = LastIndexSuperset<'x', [number, string, 0 | 1, 'x' | 'y']> // Expect: 3
+const foo: Foo = 3
+
+type Bar = LastIndexSuperset<'x', [number, 0 | 1]> // Expect: never
+
+type Baz = LastIndexSuperset<'x', [number, 0 | 1], 'not found'> // Expect: 'not found'
+const baz: Baz = 'not found'
+```
+
 ### `Append`
 
 ```typescript
