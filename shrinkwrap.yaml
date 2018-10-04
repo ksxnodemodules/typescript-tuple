@@ -1,3 +1,5 @@
+dependencies:
+  typescript-compare: 0.0.2
 devDependencies:
   clean-typescript-build: 0.0.7
   static-type-assert: 3.0.0
@@ -514,11 +516,9 @@ packages:
   /typescript-compare/0.0.2:
     dependencies:
       typescript-logic: 0.0.0
-    dev: true
     resolution:
       integrity: sha512-8ja4j7pMHkfLJQO2/8tut7ub+J3Lw2S3061eJLFQcvs3tsmJKp8KG5NtpLn7KcY2w08edF74BSVN7qJS0U6oHA==
   /typescript-logic/0.0.0:
-    dev: true
     resolution:
       integrity: sha512-zXFars5LUkI3zP492ls0VskH3TtdeHCqu0i7/duGt60i5IGPIpAHE/DWo5FqJ6EjQ15YKXrt+AETjv60Dat34Q==
   /typescript/3.1.1:
@@ -594,3 +594,4 @@ specifiers:
   static-type-assert: ^3.0.0
   toolcheck: ^0.0.5
   typescript: ^3.1.1
+  typescript-compare: ^0.0.2

@@ -25,6 +25,9 @@
     "url": "https://github.com/ksxnodemodules/typescript-tuple/issues"
   },
   "homepage": "https://github.com/ksxnodemodules/typescript-tuple#readme",
+  "dependencies": {
+    "typescript-compare": "^0.0.2"
+  },
   "devDependencies": {
     "typescript": "^3.1.1",
     "static-type-assert": "^3.0.0",
