@@ -34,6 +34,9 @@ export type _SplitInfiniteTuple<Tuple extends any[], Holder extends any[] = []> 
   : never
 ]
 
+export type First<Tuple extends any[], Default = never> =
+  Tuple extends [any, ...any[]] ? Tuple[0] : Default
+
 export type Last<Tuple extends any[], Default = never> = {
   empty: Default
   single: Tuple extends [infer SoleElement] ? SoleElement : never
@@ -126,15 +129,25 @@ export type FirstIndexSuperset<
 ]
 
 export type LastIndexEqual<Type, Tuple extends any[], NotFound = never> =
-  Last<IndexesEqual<Type, Tuple>, NotFound>
+  _LastIndexFirst<_IndexesEqual<Type, Tuple>, NotFound>
 
 export type LastIndexSubset<Type, Tuple extends any[], NotFound = never> =
-  Last<IndexesSubset<Type, Tuple>, NotFound>
+  _LastIndexFirst<_IndexesSubset<Type, Tuple>, NotFound>
 
 export type LastIndexSuperset<Type, Tuple extends any[], NotFound = never> =
-  Last<IndexesSuperset<Type, Tuple>, NotFound>
+  _LastIndexFirst<_IndexesSuperset<Type, Tuple>, NotFound>
 
-export type IndexesEqual<
+export type _LastIndexFirst<Tuple extends any[], NotFound> = IsFinite<
+  Tuple,
+  First<Tuple, NotFound>,
+  SplitInfiniteTuple<Tuple> extends [any, infer Infinite] ?
+  Infinite extends (infer X) ?
+    X
+  : never
+  : never
+>
+
+export type _IndexesEqual<
   Type,
   Tuple extends any[],
   Holder extends any[] = [],
@@ -143,10 +156,10 @@ export type IndexesEqual<
   empty: Holder
   nonEmpty: ((..._: Tuple) => any) extends ((_: infer First, ..._1: infer Rest) => any) ?
     Rest extends any[] ?
-      IndexesEqual<
+      _IndexesEqual<
         Type,
         Rest,
-        Equal<First, Type> extends true ? Prepend<Holder, Tuple['length']> : Holder,
+        Equal<First, Type> extends true ? Prepend<Holder, Count['length']> : Holder,
         Prepend<Count, any>
       >
     : never
@@ -154,7 +167,7 @@ export type IndexesEqual<
   infinite: SplitInfiniteTuple<Tuple> extends [infer Finite, infer Infinite] ?
     Finite extends any[] ?
     Infinite extends (infer Last)[] ?
-      IndexesEqual<
+      _IndexesEqual<
         Type,
         Finite,
         Equal<Last, Type> extends true ? Finite['length'][] : []
@@ -166,7 +179,7 @@ export type IndexesEqual<
   Tuple extends [] ? 'empty' : IsFinite<Tuple, 'nonEmpty', 'infinite'>
 ]
 
-export type IndexesSubset<
+export type _IndexesSubset<
   Type,
   Tuple extends any[],
   Holder extends any[] = [],
@@ -175,10 +188,10 @@ export type IndexesSubset<
   empty: Holder
   nonEmpty: ((..._: Tuple) => any) extends ((_: infer First, ..._1: infer Rest) => any) ?
     Rest extends any[] ?
-      IndexesSubset<
+      _IndexesSubset<
         Type,
         Rest,
-        Extends<First, Type> extends true ? Prepend<Holder, Tuple['length']> : Holder,
+        Extends<First, Type> extends true ? Prepend<Holder, Count['length']> : Holder,
         Prepend<Count, any>
       >
     : never
@@ -186,7 +199,7 @@ export type IndexesSubset<
   infinite: SplitInfiniteTuple<Tuple> extends [infer Finite, infer Infinite] ?
     Finite extends any[] ?
     Infinite extends (infer Last)[] ?
-      IndexesSubset<
+      _IndexesSubset<
         Type,
         Finite,
         Extends<Last, Type> extends true ? Finite['length'][] : []
@@ -198,7 +211,7 @@ export type IndexesSubset<
   Tuple extends [] ? 'empty' : IsFinite<Tuple, 'nonEmpty', 'infinite'>
 ]
 
-export type IndexesSuperset<
+export type _IndexesSuperset<
   Type,
   Tuple extends any[],
   Holder extends any[] = [],
@@ -207,10 +220,10 @@ export type IndexesSuperset<
   empty: Holder
   nonEmpty: ((..._: Tuple) => any) extends ((_: infer First, ..._1: infer Rest) => any) ?
     Rest extends any[] ?
-      IndexesSuperset<
+      _IndexesSuperset<
         Type,
         Rest,
-        Type extends First ? Prepend<Holder, Tuple['length']> : Holder,
+        Type extends First ? Prepend<Holder, Count['length']> : Holder,
         Prepend<Count, any>
       >
     : never
@@ -218,7 +231,7 @@ export type IndexesSuperset<
   infinite: SplitInfiniteTuple<Tuple> extends [infer Finite, infer Infinite] ?
     Finite extends any[] ?
     Infinite extends (infer Last)[] ?
-      IndexesSuperset<
+      _IndexesSuperset<
         Type,
         Finite,
         Type extends Last ? Finite['length'][] : []
