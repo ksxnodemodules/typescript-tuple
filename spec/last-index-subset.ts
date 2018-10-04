@@ -9,12 +9,12 @@ compare<
 
 compare<
   LastIndexSubset<string, [0, true, undefined, ...string[]]>,
-  3
+  3[]
 >('equal')
 
 compare<
   LastIndexSubset<string, string[]>,
-  0
+  0[]
 >('equal')
 
 compare<

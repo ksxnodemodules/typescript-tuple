@@ -9,12 +9,12 @@ compare<
 
 compare<
   LastIndexEqual<'x', ['a', 'b', 'c', ...'x'[]]>,
-  3
+  3[]
 >('equal')
 
 compare<
   LastIndexEqual<'x', 'x'[]>,
-  0
+  0[]
 >('equal')
 
 compare<

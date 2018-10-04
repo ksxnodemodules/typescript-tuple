@@ -9,12 +9,12 @@ compare<
 
 compare<
   LastIndexSuperset<'x', [number, symbol, boolean, ...string[]]>,
-  3
+  3[]
 >('equal')
 
 compare<
   LastIndexSuperset<'x', string[]>,
-  0
+  0[]
 >('equal')
 
 compare<
