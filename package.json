@@ -4,8 +4,10 @@
   "description": "Generics to work with tuples in TypeScript",
   "main": "index.js",
   "scripts": {
-    "prepublishOnly": "tsc",
-    "postpublish": "clean-typescript-build .",
+    "build": "tsc",
+    "clean": "clean-typescript-build .",
+    "prepublishOnly": "pnpm run build",
+    "postpublish": "pnpm run clean",
     "test": "tsc --noEmit"
   },
   "repository": {
