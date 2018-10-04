@@ -18,7 +18,7 @@ import {
   SortTwoTuple,
   ShortestTuple,
   LongestTuple
-} from './index'
+} from '..'
 
 compare<IsFinite<[]>, true>('equal')
 compare<IsFinite<[], 'finite', 'infinite'>, 'finite'>('equal')

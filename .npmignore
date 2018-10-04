@@ -25,8 +25,7 @@ renovate*
 tsconfig*
 *.ts
 !*.d.ts
-spec.*
-spec.d.ts
+spec*
 *.js.map
 *.d.ts.map
 /TODO
