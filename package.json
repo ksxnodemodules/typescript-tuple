@@ -4,13 +4,13 @@
   "description": "Generics to work with tuples in TypeScript",
   "main": "index.js",
   "scripts": {
-    "build": "pnpm run lint && tsc",
+    "build": "npm run lint && tsc",
     "clean": "clean-typescript-build .",
     "lint": "tslint -p .",
-    "lint:fix": "pnpm run lint --fix",
-    "prepublishOnly": "pnpm run build",
-    "postpublish": "pnpm run clean",
-    "test": "pnpm run lint && tsc --noEmit"
+    "lint:fix": "npm run lint --fix",
+    "prepublishOnly": "npm run build",
+    "postpublish": "npm run clean",
+    "test": "npm run lint && tsc --noEmit"
   },
   "repository": {
     "type": "git",
