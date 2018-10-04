@@ -7,7 +7,8 @@ import * as utils from './utils'
  * @example IsFinite<[0], 'Finite', 'Infinite'> → 'Finite'
  * @example IsFinite<[0, ...number[]], 'Finite', 'Infinite'> → Infinite
  */
-export type IsFinite<Tuple extends any[], Finite = true, Infinite = false> = utils.IsFinite<Tuple, Finite, Infinite>
+export type IsFinite<Tuple extends any[], Finite = true, Infinite = false> =
+  utils.IsFinite<Tuple, Finite, Infinite>
 
 /**
  * Split an infinite tuple into a finite tuple and an array
@@ -165,7 +166,8 @@ export type CompareLength<Left extends any[], Right extends any[]> = utils.Compa
  * @example SortTwoTuple<[0, 1, 2], ['a', 'b', 'c']> → [[0, 1, 2], ['a', 'b', 'c']]
  * @example SortTwoTuple<[0, 1, 2], ['a', 'b', 'c'], 'EQUAL'> → 'EQUAL'
  */
-export type SortTwoTuple<Left extends any[], Right extends any[], WhenEqual = [Left, Right]> = utils.SortTwoTuple<Left, Right, WhenEqual>
+export type SortTwoTuple<Left extends any[], Right extends any[], WhenEqual = [Left, Right]> =
+  utils.SortTwoTuple<Left, Right, WhenEqual>
 
 /**
  * Find shortest tuple in a set of tuples
