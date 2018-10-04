@@ -135,6 +135,42 @@ type Baz = LastIndexSuperset<'x', [number, 0 | 1], 'not found'> // Expect: 'not 
 const baz: Baz = 'not found'
 ```
 
+### `AllIndexesEqual`
+
+```typescript
+import { AllIndexesEqual } from 'typescript-tuple'
+
+type Foo = AllIndexesEqual<'x', ['a', 'x', 'b', 'x']> // Expect: [1, 3]
+const foo: Foo = [1, 3]
+
+type Bar = AllIndexesEqual<'x', ['a', 'x', 'b', ...'x'[]]> // Expect: [1, ...3[]]
+const bar: Bar = [1, 3, 3, 3, 3]
+```
+
+### `AllIndexesSubset`
+
+```typescript
+import { AllIndexesSubset } from 'typescript-tuple'
+
+type Foo = AllIndexesSubset<string, [0, 'a', 1, 'b']> // Expect: [1, 3]
+const foo: Foo = [1, 3]
+
+type Bar = AllIndexesSubset<string, [0, 'a', 1, ...'b'[]]> // Expect: [1, ...3[]]
+const bar: Bar = [1, 3, 3, 3, 3]
+```
+
+### `AllIndexesSuper`
+
+```typescript
+import { AllIndexesSuper } from 'typescript-tuple'
+
+type Foo = AllIndexesSuper<'x', [number, string, 0 | 1, 'x' | 'y']> // Expect: [1, 3]
+const foo: Foo = [1, 3]
+
+type Bar = AllIndexesSuper<'x', [number, string, 0 | 1, ...'x'[]]> // Expect: [1, ...3[]]
+const bar: Bar = [1, 3, 3, 3, 3]
+```
+
 ### `Append`
 
 ```typescript
