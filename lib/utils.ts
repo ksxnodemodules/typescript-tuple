@@ -126,13 +126,13 @@ export type FirstIndexSuperset<
 ]
 
 export type LastIndexEqual<Type, Tuple extends any[], NotFound = never> =
-  FirstIndexEqual<Type, Reverse<Tuple>, NotFound>
+  Last<IndexesEqual<Type, Tuple>, NotFound>
 
 export type LastIndexSubset<Type, Tuple extends any[], NotFound = never> =
-  FirstIndexSubset<Type, Reverse<Tuple>, NotFound>
+  Last<IndexesSubset<Type, Tuple>, NotFound>
 
 export type LastIndexSuperset<Type, Tuple extends any[], NotFound = never> =
-  FirstIndexSuperset<Type, Reverse<Tuple>, NotFound>
+  Last<IndexesSuperset<Type, Tuple>, NotFound>
 
 export type IndexesEqual<
   Type,
