@@ -84,24 +84,24 @@ export type LastIndexSuperset<Type, Tuple extends any[], NotFound = never> =
 
 /**
  * Find all indexes of a type in tuple
- * @example IndexesEqual<'x', ['a', 'b', 'x', 'c', 'x', 'x']> → [2, 4, 5]
+ * @example AllIndexesEqual<'x', ['a', 'b', 'x', 'c', 'x', 'x']> → [2, 4, 5]
  */
-export type IndexesEqual<Type, Tuple extends any[]> =
-  utils._IndexesNormalize<utils._IndexesEqual<Type, Tuple>>
+export type AllIndexesEqual<Type, Tuple extends any[]> =
+  utils._IndexesNormalize<utils._AllIndexesEqual<Type, Tuple>>
 
 /**
  * Find all indexes of a type in tuple
- * @example IndexesSubset<string, [0, false, 'a', 1, 'b', 'c']> → [2, 4, 5]
+ * @example AllIndexesSubset<string, [0, false, 'a', 1, 'b', 'c']> → [2, 4, 5]
  */
-export type IndexesSubset<Type, Tuple extends any[]> =
-  utils._IndexesNormalize<utils._IndexesSubset<Type, Tuple>>
+export type AllIndexesSubset<Type, Tuple extends any[]> =
+  utils._IndexesNormalize<utils._AllIndexesSubset<Type, Tuple>>
 
 /**
  * Find all indexes of a type in tuple
- * @example IndexesSuperset<'x', [number, boolean, string, 0, 'x', 'a' | 'b']> → [2, 4, 5]
+ * @example AllIndexesSuperset<'x', [number, boolean, string, 0, 'x', 'a' | 'b']> → [2, 4, 5]
  */
-export type IndexesSuperset<Type, Tuple extends any[]> =
-  utils._IndexesNormalize<utils._IndexesSuperset<Type, Tuple>>
+export type AllIndexesSuperset<Type, Tuple extends any[]> =
+  utils._IndexesNormalize<utils._AllIndexesSuperset<Type, Tuple>>
 
 /**
  * Add an element to the end of a tuple
