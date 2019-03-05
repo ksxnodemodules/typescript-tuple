@@ -51,6 +51,14 @@ type Foo = Last<['a', 'b', 'c']> // Expect: 'c'
 const foo: Foo = 'c'
 ```
 
+### `Tail`
+
+```typescript
+import { Tail } from 'typescript-tuple'
+type Foo = Tail<['a', 'b', 'c']> // Expect: ['b', 'c']
+const foo: Foo = ['b', 'c']
+```
+
 ### `FirstIndexEqual`
 
 ```typescript
@@ -233,6 +241,14 @@ const baz: Baz = Array<number>()
 import { ConcatMultiple } from 'typescript-tuple'
 type Foo = ConcatMultiple<[[], ['a'], ['b', 'c']]> // Expect ['a', 'b', 'c']
 const foo: Foo = ['a', 'b', 'c']
+```
+
+### `SliceStartQuantity`
+
+```typescript
+import { SliceStartQuantity } from 'typescript-tuple'
+type Foo = SliceStartQuantity<[0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 2, 4> // Expect [2, 3, 4, 5]
+const foo: Foo = [2, 3, 4, 5]
 ```
 
 ### `SingleTupleSet`

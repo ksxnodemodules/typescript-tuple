@@ -51,6 +51,11 @@ export type Last<Tuple extends any[], Default = never> = {
   : never
 ]
 
+export type Tail<Tuple extends any[]> =
+  ((...args: Tuple) => any) extends ((_: any, ..._1: infer Rest) => any)
+    ? Rest
+    : never
+
 export type FirstIndexEqual<
   Type,
   Tuple extends any[],
@@ -332,6 +337,37 @@ export type ConcatMultiple<TupleSet extends any[][]> = {
   }
 }[
   TupleSet extends [] ? 'empty' : IsFinite<TupleSet, 'nonEmpty', 'infinite'>
+]
+
+export type SliceStartQuantity<
+  Tuple extends any[],
+  Start extends number,
+  Quantity extends number,
+  Holder extends any[] = [],
+  Count extends any[] = []
+> = {
+  before: SliceStartQuantity<
+    Tail<Tuple>,
+    Start,
+    Quantity,
+    Holder,
+    Prepend<Count, Count['length']>
+  >,
+  start: ((...args: Tuple) => any) extends ((_: infer First, ..._1: infer Rest) => any)
+    ? SliceStartQuantity<
+      Rest,
+      Start,
+      Quantity,
+      Prepend<Holder, First>,
+      Count
+    >
+    : never,
+  end: Reverse<Holder>
+}[
+  Tuple extends [] ? 'end' :
+  Quantity extends Holder['length'] ? 'end' :
+  Start extends Count['length'] ? 'start' :
+  'before'
 ]
 
 export type SingleTupleSet<Types extends any[], Holder extends [any][] = []> = {

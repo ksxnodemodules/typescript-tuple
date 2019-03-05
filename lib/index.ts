@@ -29,6 +29,12 @@ export type First<Tuple extends [any, ...any[]]> = Tuple[0]
 export type Last<Tuple extends any[]> = utils.Last<Tuple>
 
 /**
+ * Drop the first element
+ * @example Tail<[0, 1, 2, 3]> → [1, 2, 3]
+ */
+export type Tail<Tuple extends any[]> = utils.Tail<Tuple>
+
+/**
  * Find index of a type in tuple
  * @example FirstIndexEqual<'x', ['a', 'b', 'c', 'x', 'd']> → 3
  * @example FirstIndexEqual<'x', ['a', 'b', 'c']> → never
@@ -139,6 +145,18 @@ export type Repeat<Type, Count extends number> = utils.Repeat<Type, Count, []>
  * @example ConcatMultiple<[], [0], [1, 2], [3, 4, 5]> → [0, 1, 2, 3, 4, 5]
  */
 export type ConcatMultiple<TupleSet extends any[][]> = utils.ConcatMultiple<TupleSet>
+
+/**
+ * Slice a tuple
+ * @example SliceStartQuantity<[0, 1, 2, 3, 4, 5, 6], 2> → [2, 3, 4, 5, 6]
+ * @example SliceStartQuantity<[0, 1, 2, 3, 4, 5, 6], 2, 3> → [2, 3, 4]
+ * @example SliceStartQuantity<[0, 1, 2, 3, 4, 5, 6], 2, 9> → [2, 3, 4, 5, 6]
+ */
+export type SliceStartQuantity<
+  Tuple extends any[],
+  Start extends number,
+  Quantity extends number = Tuple['length']
+> = utils.SliceStartQuantity<Tuple, Start, Quantity>
 
 /**
  * Create a set of tuple of single element
