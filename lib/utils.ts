@@ -1,10 +1,10 @@
 import { Extends, Equal } from 'typescript-compare'
 
 export type IsFinite<Tuple extends any[], Finite, Infinite> = {
-  empty: Finite,
+  empty: Finite
   nonEmpty: ((..._: Tuple) => any) extends ((_: infer First, ..._1: infer Rest) => any)
     ? IsFinite<Rest, Finite, Infinite>
-    : never,
+    : never
   infinite: Infinite
 }[
   Tuple extends [] ? 'empty' :
@@ -352,7 +352,7 @@ export type SliceStartQuantity<
     Quantity,
     Holder,
     Prepend<Count, Count['length']>
-  >,
+  >
   start: ((...args: Tuple) => any) extends ((_: infer First, ..._1: infer Rest) => any)
     ? SliceStartQuantity<
       Rest,
@@ -361,7 +361,7 @@ export type SliceStartQuantity<
       Prepend<Holder, First>,
       Count
     >
-    : never,
+    : never
   end: Reverse<Holder>
 }[
   Tuple extends [] ? 'end' :
@@ -376,8 +376,8 @@ export type SingleTupleSet<Types extends any[], Holder extends [any][] = []> = {
     ? SingleTupleSet<Reverse<ReversedRest>, Prepend<Holder, [Last]>>
     : never
   infinite: SplitInfiniteTuple<Types> extends [infer Finite, infer Infinite] ?
-    Finite extends any [] ?
-    Infinite extends (infer RepeatedElement)[] ?
+    Finite extends any[] ?
+    Infinite extends Array<infer RepeatedElement> ?
       SingleTupleSet<Finite, [RepeatedElement][]>
     : never
     : never
@@ -419,7 +419,7 @@ export type SortTwoTuple<Left extends any[], Right extends any[], WhenEqual = [L
 }[CompareLength<Left, Right>]
 
 export type ShortestTuple<TupleSet extends any[][], Shortest = any[]> = {
-  empty: Shortest,
+  empty: Shortest
   nonEmpty: ((..._: TupleSet) => any) extends ((_: infer Head, ..._1: infer Tail) => any) ?
     Tail extends any[] ?
     Shortest extends any[] ?
