@@ -8,9 +8,10 @@
     "clean": "clean-typescript-build .",
     "lint": "tslint -p .",
     "lint:fix": "pnpm run lint -- --fix",
+    "test:types": "tsc --noEmit",
     "prepublishOnly": "pnpm run build",
     "postpublish": "pnpm run clean",
-    "test": "pnpm run lint && tsc --noEmit"
+    "test": "pnpm run lint && pnpm run test:types"
   },
   "repository": {
     "type": "git",
