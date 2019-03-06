@@ -148,14 +148,13 @@ export type ConcatMultiple<TupleSet extends any[][]> = utils.ConcatMultiple<Tupl
 
 /**
  * Slice a tuple
- * @example SliceStartQuantity<[0, 1, 2, 3, 4, 5, 6], 2> → [2, 3, 4, 5, 6]
  * @example SliceStartQuantity<[0, 1, 2, 3, 4, 5, 6], 2, 3> → [2, 3, 4]
  * @example SliceStartQuantity<[0, 1, 2, 3, 4, 5, 6], 2, 9> → [2, 3, 4, 5, 6]
  */
 export type SliceStartQuantity<
   Tuple extends any[],
   Start extends number,
-  Quantity extends number = Tuple['length']
+  Quantity extends number
 > = utils.SliceStartQuantity<Tuple, Start, Quantity>
 
 /**
