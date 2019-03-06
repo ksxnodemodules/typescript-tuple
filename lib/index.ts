@@ -147,6 +147,14 @@ export type Repeat<Type, Count extends number> = utils.Repeat<Type, Count, []>
 export type ConcatMultiple<TupleSet extends any[][]> = utils.ConcatMultiple<TupleSet>
 
 /**
+ * Drop `Quantity` first elements of a tuple
+ * @example Drop<['a', 'b', 'c', 'd', 'e'], 2> → ['c', 'd', 'e']
+ * @example Drop<['a', 'b', 'c', 'd', 'e', ...string[]], 2> → ['c', 'd', 'e', ...string[]]
+ * @example Drop<['a', 'b', 'c', 'd', 'e', ...string[]], 10> → string[]
+ */
+export type Drop<Tuple extends any[], Quantity extends number> = utils.Drop<Tuple, Quantity>
+
+/**
  * Slice a tuple
  * @example SliceStartQuantity<[0, 1, 2, 3, 4, 5, 6], 2, 3> → [2, 3, 4]
  * @example SliceStartQuantity<[0, 1, 2, 3, 4, 5, 6], 2, 9> → [2, 3, 4, 5, 6]

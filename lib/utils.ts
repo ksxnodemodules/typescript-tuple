@@ -339,6 +339,21 @@ export type ConcatMultiple<TupleSet extends any[][]> = {
   TupleSet extends [] ? 'empty' : IsFinite<TupleSet, 'nonEmpty', 'infinite'>
 ]
 
+export type Drop<
+  Tuple extends any[],
+  Quantity extends number,
+  Count extends any[] = []
+> = {
+  matched: Tuple
+  unmatched: ((...args: Tuple) => any) extends ((_: any, ..._1: infer Rest) => any)
+    ? Drop<Rest, Quantity, Prepend<Count, Count['length']>>
+    : never
+}[
+  Tuple extends [] ? 'matched' :
+  Quantity extends Count['length'] ? 'matched' :
+  'unmatched'
+]
+
 export type SliceStartQuantity<
   Tuple extends any[],
   Start extends number,

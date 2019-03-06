@@ -243,6 +243,24 @@ type Foo = ConcatMultiple<[[], ['a'], ['b', 'c']]> // Expect ['a', 'b', 'c']
 const foo: Foo = ['a', 'b', 'c']
 ```
 
+### `Drop`
+
+```typescript
+import { Drop } from 'typescript-tuple'
+
+type Foo = Drop<[0, 1, 2, 3, 4], 2> // Expect [2, 3, 4]
+const foo: Foo = [2, 3, 4]
+
+type Bar = Drop<[0, 1, 2, 3, 4, ...number[]], 2> // Expect [2, 3, 4, ...number[]]
+const bar: Bar = [2, 3, 4]
+
+type Baz = Drop<[0, 1, 2, 3, 4], 10> // Expect []
+const baz: Baz = [2, 3, 4]
+
+type Qux = Drop<[0, 1, 2, 3, 4, ...number[]], 10> // Expect number[]
+const qux: Qux = [2, 3, 4]
+```
+
 ### `SliceStartQuantity`
 
 ```typescript
