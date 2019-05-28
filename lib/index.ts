@@ -208,3 +208,9 @@ export type ShortestTuple<TupleSet extends [any[], ...any[][]]> = utils.Shortest
  * @example LongestTuple<[[0, 1, 2], [true, false], ['a', 'b', 'c', 'd']]> → ['a', 'b', 'c', 'd']
  */
 export type LongestTuple<TupleSet extends [any[], ...any[][]]> = utils.LongestTuple<TupleSet>
+
+/**
+ * Filter tuple elements thats match the mask
+ * @example FilterTuple<[1, 2, true, '3'], string | number> → [1, 2, "3"]
+ */
+export type FilterTuple<TupleSet extends any[], Mask> = utils.FilterTuple<TupleSet, Mask>
