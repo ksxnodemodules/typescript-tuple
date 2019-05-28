@@ -466,3 +466,7 @@ export type LongestTuple<TupleSet extends any[][], Longest = []> = {
 }[
   TupleSet extends [] ? 'empty' : 'nonEmpty'
 ]
+
+export type FilterTuple<Tuple extends any[], Mask> = ConcatMultiple<{
+  [K in keyof Tuple]: Tuple[K] extends Mask ? [Tuple[K]] : []
+}>

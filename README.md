@@ -346,6 +346,18 @@ type Bar = LongestTuple<[[], [false, true], ...[0, 1, 2][]]> // Expect: [0, 1, 2
 const bar: Bar = [0, 1, 2]
 ```
 
+### `FilterTuple`
+
+```typescript
+import { FilterTuple } from 'typescript-tuple'
+
+type Foo = FilterTuple<[1, '1'], number> // Expect: [1]
+const foo: Foo = [1]
+
+type Bar = FilterTuple<[1, '1', null, true], 1 | '1' | true> // Expect: [1, '1', true]
+const bar: Bar = [1, '1', true]
+```
+
 ## License
 
 [MIT](https://git.io/fA2d9) @ [Hoàng Văn Khải](https://github.com/KSXGitHub)
