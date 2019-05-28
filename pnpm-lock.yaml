@@ -6,7 +6,7 @@ devDependencies:
   toolcheck: 0.0.5
   tslint: 5.16.0
   tslint-config-standard: 8.0.1
-  typescript: 3.1.6
+  typescript: 3.4.5
 lockfileVersion: 5
 packages:
   /@babel/code-frame/7.0.0:
@@ -831,13 +831,13 @@ packages:
   /typescript-logic/0.0.0:
     resolution:
       integrity: sha512-zXFars5LUkI3zP492ls0VskH3TtdeHCqu0i7/duGt60i5IGPIpAHE/DWo5FqJ6EjQ15YKXrt+AETjv60Dat34Q==
-  /typescript/3.1.6:
+  /typescript/3.4.5:
     dev: true
     engines:
       node: '>=4.2.0'
     hasBin: true
     resolution:
-      integrity: sha512-tDMYfVtvpb96msS1lDX9MEdHrW4yOuZ4Kdc4Him9oU796XldPYF/t2+uKoX0BBa0hXXwDlqYQbXY5Rzjzc5hBA==
+      integrity: sha512-YycBxUb49UUhdNMU5aJ7z5Ej2XGmaIBL0x34vZ82fn3hGvD+bgrMrVDpatgz2f7YxUMJxMkbWxJZeAvDxVe7Vw==
   /universalify/0.1.2:
     dev: true
     engines:
@@ -902,5 +902,5 @@ specifiers:
   toolcheck: ^0.0.5
   tslint: ^5.11.0
   tslint-config-standard: ^8.0.1
-  typescript: ~3.1.1
+  typescript: ~3.4.0
   typescript-compare: ^0.0.2
