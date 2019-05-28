@@ -6,7 +6,7 @@ devDependencies:
   toolcheck: 0.0.5
   tslint: 5.15.0
   tslint-config-standard: 8.0.1
-  typescript: 3.4.1
+  typescript: 3.1.6
 lockfileVersion: 5
 packages:
   /@types/cosmiconfig/5.0.3:
@@ -857,13 +857,13 @@ packages:
   /typescript-logic/0.0.0:
     resolution:
       integrity: sha512-zXFars5LUkI3zP492ls0VskH3TtdeHCqu0i7/duGt60i5IGPIpAHE/DWo5FqJ6EjQ15YKXrt+AETjv60Dat34Q==
-  /typescript/3.4.1:
+  /typescript/3.1.6:
     dev: true
     engines:
       node: '>=4.2.0'
     hasBin: true
     resolution:
-      integrity: sha512-3NSMb2VzDQm8oBTLH6Nj55VVtUEpe/rgkIzMir0qVoLyjDZlnMBva0U6vDiV3IH+sl/Yu6oP5QwsAQtHPmDd2Q==
+      integrity: sha512-tDMYfVtvpb96msS1lDX9MEdHrW4yOuZ4Kdc4Him9oU796XldPYF/t2+uKoX0BBa0hXXwDlqYQbXY5Rzjzc5hBA==
   /universalify/0.1.2:
     dev: true
     engines:
@@ -928,5 +928,5 @@ specifiers:
   toolcheck: ^0.0.5
   tslint: ^5.11.0
   tslint-config-standard: ^8.0.1
-  typescript: ^3.1.1
+  typescript: ~3.1.1
   typescript-compare: ^0.0.2
