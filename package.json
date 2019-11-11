@@ -36,7 +36,7 @@
     "tslint": "^5.11.0",
     "tslint-config-standard": "^8.0.1",
     "static-type-assert": "^3.0.0",
-    "toolcheck": "^0.0.5",
+    "toolcheck": "^0.1.0",
     "clean-typescript-build": "^0.1.0"
   }
 }
