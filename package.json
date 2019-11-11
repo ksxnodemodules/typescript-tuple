@@ -34,7 +34,7 @@
   "devDependencies": {
     "typescript": "~3.1.1",
     "tslint": "^5.11.0",
-    "tslint-config-standard": "^8.0.1",
+    "tslint-config-standard": "^9.0.0",
     "static-type-assert": "^3.0.0",
     "toolcheck": "^0.0.5",
     "clean-typescript-build": "^0.1.0"
