@@ -32,7 +32,7 @@
     "typescript-compare": "^0.0.2"
   },
   "devDependencies": {
-    "typescript": "~3.1.1",
+    "typescript": "~3.9.0",
     "tslint": "^6.0.0",
     "tslint-config-standard": "^8.0.1",
     "static-type-assert": "^3.0.0",
