@@ -4,7 +4,7 @@ Generics to work with tuples in TypeScript
 
 ## Requirements
 
-* TypeScript ≥ 3.0.0
+* TypeScript ≥ 4.0.0
 
 ## Usage
 
