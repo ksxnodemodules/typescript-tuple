@@ -266,8 +266,7 @@ export type _AllIndexesSuperset<
   Tuple extends [] ? 'empty' : IsFinite<Tuple, 'nonEmpty', 'infinite'>
 ]
 
-export type Prepend<Tuple extends any[], Addend> =
-  ((_: Addend, ..._1: Tuple) => any) extends ((..._: infer Result) => any) ? Result : never
+export type Prepend<Tuple extends any[], Addend> = [Addend, ...Tuple]
 
 export type Reverse<Tuple extends any[], Prefix extends any[] = []> = {
   empty: Prefix,
@@ -284,23 +283,7 @@ export type Reverse<Tuple extends any[], Prefix extends any[] = []> = {
     : 'empty'
 ]
 
-export type Concat<Left extends any[], Right extends any[]> = {
-  emptyLeft: Right
-  singleLeft: Left extends [infer SoleElement]
-    ? Prepend<Right, SoleElement>
-    : never
-  multiLeft: ((..._: Reverse<Left>) => any) extends ((_: infer LeftLast, ..._1: infer ReversedLeftRest) => any)
-    ? Concat<Reverse<ReversedLeftRest>, Prepend<Right, LeftLast>>
-    : never
-  infiniteLeft: {
-    ERROR: 'Left is not finite',
-    CODENAME: 'InfiniteLeft' & 'Infinite'
-  }
-}[
-  Left extends [] ? 'emptyLeft' :
-  Left extends [any] ? 'singleLeft' :
-  IsFinite<Left, 'multiLeft', 'infiniteLeft'>
-]
+export type Concat<Left extends any[], Right extends any[]> = [...Left, ...Right]
 
 export type Repeat<Type, Count extends number, Holder extends any[] = []> =
   Count extends never ? never :

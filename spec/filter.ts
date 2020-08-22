@@ -1,5 +1,4 @@
-import assert from 'static-type-assert'
-import compare = assert.compare
+import { compare } from 'static-type-assert'
 import { FilterTuple } from '..'
 
 compare<FilterTuple<[1], number>, [1]>('equal')

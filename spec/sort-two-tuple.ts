@@ -1,5 +1,4 @@
-import assert from 'static-type-assert'
-import compare = assert.compare
+import { compare } from 'static-type-assert'
 import { SortTwoTuple } from '..'
 
 compare<SortTwoTuple<[0, 1, 2, 3], ['a', 'b']>, [['a', 'b'], [0, 1, 2, 3]]>('equal')

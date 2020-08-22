@@ -1,5 +1,4 @@
-import assert from 'static-type-assert'
-import compare = assert.compare
+import { compare } from 'static-type-assert'
 import { Reverse } from '..'
 
 compare<Reverse<[]>, []>('equal')
