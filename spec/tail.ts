@@ -1,5 +1,4 @@
-import assert from 'static-type-assert'
-import compare = assert.compare
+import { compare } from 'static-type-assert'
 import { Tail } from '..'
 
 compare<Tail<[0, 1, 2, 3]>, [1, 2, 3]>('equal')
