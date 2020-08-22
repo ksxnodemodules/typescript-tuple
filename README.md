@@ -23,18 +23,6 @@ type Baz = IsFinite<[0, 1, 2], 'finite', 'infinite'> // Expect: 'finite'
 const baz: Baz = 'finite'
 ```
 
-### `SplitInfiniteTuple`
-
-```typescript
-import { SplitInfiniteTuple } from 'typescript-tuple'
-type Foo = SplitInfiniteTuple<[0, 1, 2, ...number[]]> // Expect: [[0, 1, 2], number[]]
-type FinitePart = Foo[0] // Expect: [0, 1, 2]
-type InfinitePart = Foo[1] // Expect: number[]
-const foo: Foo = [[0, 1, 2], Array<number>()]
-const finitePart: FinitePart = [0, 1, 2]
-const infinitePart: InfinitePart = Array<number>()
-```
-
 ### `First`
 
 ```typescript
@@ -57,126 +45,6 @@ const foo: Foo = 'c'
 import { Tail } from 'typescript-tuple'
 type Foo = Tail<['a', 'b', 'c']> // Expect: ['b', 'c']
 const foo: Foo = ['b', 'c']
-```
-
-### `FirstIndexEqual`
-
-```typescript
-import { FirstIndexEqual } from 'typescript-tuple'
-
-type Foo = FirstIndexEqual<'x', ['a', 'x', 'b', 'x']> // Expect: 1
-const foo: Foo = 1
-
-type Bar = FirstIndexEqual<'x', ['a', 'b']> // Expect: never
-
-type Baz = FirstIndexEqual<'x', ['a', 'b'], 'not found'> // Expect: 'not found'
-const baz: Baz = 'not found'
-```
-
-### `FirstIndexSubset`
-
-```typescript
-import { FirstIndexSubset } from 'typescript-tuple'
-
-type Foo = FirstIndexSubset<string, [0, 'a', 1, 'b']> // Expect: 1
-const foo: Foo = 1
-
-type Bar = FirstIndexSubset<string, [0, 1]> // Expect: never
-
-type Baz = FirstIndexSubset<string, [0, 1], 'not found'> // Expect: 'not found'
-const baz: Baz = 'not found'
-```
-
-### `FirstIndexSuperset`
-
-```typescript
-import { FirstIndexSuperset } from 'typescript-tuple'
-
-type Foo = FirstIndexSuperset<'x', [number, string, 0 | 1, 'x' | 'y']> // Expect: 1
-const foo: Foo = 1
-
-type Bar = FirstIndexSuperset<'x', [number, 0 | 1]> // Expect: never
-
-type Baz = FirstIndexSuperset<'x', [number, 0 | 1], 'not found'> // Expect: 'not found'
-const baz: Baz = 'not found'
-```
-
-### `LastIndexEqual`
-
-```typescript
-import { LastIndexEqual } from 'typescript-tuple'
-
-type Foo = LastIndexEqual<'x', ['a', 'x', 'b', 'x']> // Expect: 3
-const foo: Foo = 3
-
-type Bar = LastIndexEqual<'x', ['a', 'b']> // Expect: never
-
-type Baz = LastIndexEqual<'x', ['a', 'b'], 'not found'> // Expect: 'not found'
-const baz: Baz = 'not found'
-```
-
-### `LastIndexSubset`
-
-```typescript
-import { LastIndexSubset } from 'typescript-tuple'
-
-type Foo = LastIndexSubset<string, [0, 'a', 1, 'b']> // Expect: 3
-const foo: Foo = 3
-
-type Bar = LastIndexSubset<string, [0, 1]> // Expect: never
-
-type Baz = LastIndexSubset<string, [0, 1], 'not found'> // Expect: 'not found'
-const baz: Baz = 'not found'
-```
-
-### `LastIndexSuperset`
-
-```typescript
-import { LastIndexSuperset } from 'typescript-tuple'
-
-type Foo = LastIndexSuperset<'x', [number, string, 0 | 1, 'x' | 'y']> // Expect: 3
-const foo: Foo = 3
-
-type Bar = LastIndexSuperset<'x', [number, 0 | 1]> // Expect: never
-
-type Baz = LastIndexSuperset<'x', [number, 0 | 1], 'not found'> // Expect: 'not found'
-const baz: Baz = 'not found'
-```
-
-### `AllIndexesEqual`
-
-```typescript
-import { AllIndexesEqual } from 'typescript-tuple'
-
-type Foo = AllIndexesEqual<'x', ['a', 'x', 'b', 'x']> // Expect: [1, 3]
-const foo: Foo = [1, 3]
-
-type Bar = AllIndexesEqual<'x', ['a', 'x', 'b', ...'x'[]]> // Expect: [1, ...3[]]
-const bar: Bar = [1, 3, 3, 3, 3]
-```
-
-### `AllIndexesSubset`
-
-```typescript
-import { AllIndexesSubset } from 'typescript-tuple'
-
-type Foo = AllIndexesSubset<string, [0, 'a', 1, 'b']> // Expect: [1, 3]
-const foo: Foo = [1, 3]
-
-type Bar = AllIndexesSubset<string, [0, 'a', 1, ...'b'[]]> // Expect: [1, ...3[]]
-const bar: Bar = [1, 3, 3, 3, 3]
-```
-
-### `AllIndexesSuper`
-
-```typescript
-import { AllIndexesSuper } from 'typescript-tuple'
-
-type Foo = AllIndexesSuper<'x', [number, string, 0 | 1, 'x' | 'y']> // Expect: [1, 3]
-const foo: Foo = [1, 3]
-
-type Bar = AllIndexesSuper<'x', [number, string, 0 | 1, ...'x'[]]> // Expect: [1, ...3[]]
-const bar: Bar = [1, 3, 3, 3, 3]
 ```
 
 ### `Append`
@@ -267,18 +135,6 @@ const qux: Qux = [2, 3, 4]
 import { SliceStartQuantity } from 'typescript-tuple'
 type Foo = SliceStartQuantity<[0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 2, 4> // Expect [2, 3, 4, 5]
 const foo: Foo = [2, 3, 4, 5]
-```
-
-### `SingleTupleSet`
-
-```typescript
-import { SingleTupleSet } from 'typescript-tuple'
-
-type Foo = SingleTupleSet<[0, 1, 2]> // Expect [[0], [1], [2]]
-const foo: Foo = [[0], [1], [2]]
-
-type Bar = SingleTupleSet<'x'[]> // Expect ['x'][]
-const bar: Bar = Array<['x']>()
 ```
 
 ### `FillTuple`

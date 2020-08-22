@@ -11,12 +11,6 @@ export type IsFinite<Tuple extends any[], Finite = true, Infinite = false> =
   utils.IsFinite<Tuple, Finite, Infinite>
 
 /**
- * Split an infinite tuple into a finite tuple and an array
- * @example SplitInfiniteTuple<[0, 1, 2, ...number[]]> → [[0, 1, 2], number[]]
- */
-export type SplitInfiniteTuple<Tuple extends any[]> = utils.SplitInfiniteTuple<Tuple>
-
-/**
  * Get type of first element
  * @example First<[0, 1, 2]> → 0
  */
@@ -33,81 +27,6 @@ export type Last<Tuple extends any[]> = utils.Last<Tuple>
  * @example Tail<[0, 1, 2, 3]> → [1, 2, 3]
  */
 export type Tail<Tuple extends any[]> = utils.Tail<Tuple>
-
-/**
- * Find index of a type in tuple
- * @example FirstIndexEqual<'x', ['a', 'b', 'c', 'x', 'd']> → 3
- * @example FirstIndexEqual<'x', ['a', 'b', 'c']> → never
- * @example FirstIndexEqual<'x', ['a', 'b', 'c'], 'NotFound'> → 'NotFound'
- */
-export type FirstIndexEqual<Type, Tuple extends any[], NotFound = never> =
-  utils.FirstIndexEqual<Type, Tuple, NotFound>
-
-/**
- * Find index of the first element in tuple that satifies a type
- * @example FirstIndexSubset<string, [true, false, 'x', 3]> → 2
- * @example FirstIndexSubset<string, [true, false, 0, 1]> → never
- * @example FirstIndexSubset<string, [true, false, 0, 1], 'NotFound'> → 'NotFound'
- */
-export type FirstIndexSubset<Type, Tuple extends any[], NotFound = never> =
-  utils.FirstIndexSubset<Type, Tuple, NotFound>
-
-/**
- * Find index of the first element in tuple that satifies a type
- * @example FirstIndexSuperset<5, [boolean, string, number, object]> → 2
- * @example FirstIndexSuperset<5, [boolean, string, object]> → never
- * @example FirstIndexSuperset<5, [boolean, string, object], 'NotFound'> → 'NotFound'
- */
-export type FirstIndexSuperset<Type, Tuple extends any[], NotFound = never> =
-  utils.FirstIndexSuperset<Type, Tuple, NotFound>
-
-/**
- * Find index of a type in tuple
- * @example LastIndexEqual<'x', ['a', 'b', 'c', 'x', 'd']> → 3
- * @example LastIndexEqual<'x', ['a', 'b', 'c']> → never
- * @example LastIndexEqual<'x', ['a', 'b', 'c'], 'NotFound'> → 'NotFound'
- */
-export type LastIndexEqual<Type, Tuple extends any[], NotFound = never> =
-  utils.LastIndexEqual<Type, Tuple, NotFound>
-
-/**
- * Find index of the first element in tuple that satifies a type
- * @example LastIndexSubset<string, [true, false, 'x', 3]> → 2
- * @example LastIndexSubset<string, [true, false, 0, 1]> → never
- * @example LastIndexSubset<string, [true, false, 0, 1], 'NotFound'> → 'NotFound'
- */
-export type LastIndexSubset<Type, Tuple extends any[], NotFound = never> =
-  utils.LastIndexSubset<Type, Tuple, NotFound>
-
-/**
- * Find index of the first element in tuple that satifies a type
- * @example LastIndexSuperset<5, [boolean, string, number, object]> → 2
- * @example LastIndexSuperset<5, [boolean, string, object]> → never
- * @example LastIndexSuperset<5, [boolean, string, object], 'NotFound'> → 'NotFound'
- */
-export type LastIndexSuperset<Type, Tuple extends any[], NotFound = never> =
-  utils.LastIndexSuperset<Type, Tuple, NotFound>
-
-/**
- * Find all indexes of a type in tuple
- * @example AllIndexesEqual<'x', ['a', 'b', 'x', 'c', 'x', 'x']> → [2, 4, 5]
- */
-export type AllIndexesEqual<Type, Tuple extends any[]> =
-  utils._IndexesNormalize<utils._AllIndexesEqual<Type, Tuple>>
-
-/**
- * Find all indexes of a type in tuple
- * @example AllIndexesSubset<string, [0, false, 'a', 1, 'b', 'c']> → [2, 4, 5]
- */
-export type AllIndexesSubset<Type, Tuple extends any[]> =
-  utils._IndexesNormalize<utils._AllIndexesSubset<Type, Tuple>>
-
-/**
- * Find all indexes of a type in tuple
- * @example AllIndexesSuperset<'x', [number, boolean, string, 0, 'x', 'a' | 'b']> → [2, 4, 5]
- */
-export type AllIndexesSuperset<Type, Tuple extends any[]> =
-  utils._IndexesNormalize<utils._AllIndexesSuperset<Type, Tuple>>
 
 /**
  * Add an element to the end of a tuple
@@ -164,13 +83,6 @@ export type SliceStartQuantity<
   Start extends number,
   Quantity extends number
 > = utils.SliceStartQuantity<Tuple, Start, Quantity>
-
-/**
- * Create a set of tuple of single element
- * @example SingleTupleSet<[0, 1, 2]> → [[0], [1], [2]]
- * @example SingleTupleSet<[0, 1, 2, ...number[]]> → [[0], [1], [2], ...[number][]]
- */
-export type SingleTupleSet<Types extends any[]> = utils.SingleTupleSet<Types>
 
 /**
  * Fill a tuple of types
