@@ -19,6 +19,7 @@ temp.*
 *.js
 *.js.map
 *.d.ts
+/.vscode
 
 # Logs
 logs
