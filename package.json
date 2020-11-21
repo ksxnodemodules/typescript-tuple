@@ -32,10 +32,10 @@
     "typescript-compare": "^0.0.2"
   },
   "devDependencies": {
-    "typescript": "~4.0.2",
+    "typescript": "~4.1.2",
     "tslint": "^6.1.3",
     "tslint-config-standard": "^9.0.0",
-    "static-type-assert": "^4.0.0",
+    "static-type-assert": "^4.0.1",
     "toolcheck": "^0.1.4",
     "clean-typescript-build": "^0.1.5"
   }
