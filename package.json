@@ -1,6 +1,6 @@
 {
   "name": "typescript-tuple",
-  "version": "5.0.0-rc.0",
+  "version": "5.0.0",
   "description": "Generics to work with tuples in TypeScript",
   "main": "index.js",
   "scripts": {
