@@ -20,3 +20,18 @@ compare<
   Drop<[0, 1, 2, 3, 4, ...number[]], 9>,
   number[]
 >('equal')
+
+compare<
+  Drop<any[], number>,
+  any[]
+>('equal')
+
+compare<
+  Drop<[], number>,
+  []
+>('equal')
+
+compare<
+  Drop<any[], 1>,
+  any[]
+>('equal')

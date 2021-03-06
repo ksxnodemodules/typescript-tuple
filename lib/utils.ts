@@ -84,6 +84,10 @@ export type ConcatMultiple<TupleSet extends any[][]> = {
 ]
 
 export type Drop<Tuple extends any[], Quantity extends number, Count extends any[] = []> =
+  [
+    any[] extends Tuple ? true : false,
+    number extends Quantity ? true : false
+  ] extends true[] ? Tuple :
   Tuple extends [] ? Tuple :
   Quantity extends Count['length'] ? Tuple :
   ((...args: Tuple) => any) extends ((_: any, ..._1: infer Rest) => any)
